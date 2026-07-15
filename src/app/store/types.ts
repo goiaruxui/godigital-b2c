@@ -1,0 +1,62 @@
+export type UserProfile = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  country: string;
+  avatarInitials: string;
+};
+
+export type RegistrationDraft = {
+  country: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  otpVerified: boolean;
+  kycCompleted: boolean;
+};
+
+export type AuthState = {
+  status: "guest" | "registering" | "authenticated";
+  user: UserProfile | null;
+  credentials: { email: string; password: string } | null;
+  registration: RegistrationDraft;
+};
+
+export type CardKind = "prepaga" | "credito";
+
+export type Card = {
+  id: string;
+  label: string;
+  kind: CardKind;
+  last4: string;
+  paused: boolean;
+};
+
+export type AccountState = {
+  balance: number;
+  cvu: string;
+  alias: string;
+  cards: Card[];
+};
+
+export type TransactionType =
+  | "cashin"
+  | "transfer_out"
+  | "transfer_in"
+  | "qr_payment"
+  | "service_payment"
+  | "loan_disbursement"
+  | "advance_disbursement"
+  | "exchange";
+
+export type Transaction = {
+  id: string;
+  type: TransactionType;
+  /** Signed: positive credits the account, negative debits it. */
+  amount: number;
+  counterparty: string;
+  description: string;
+  createdAt: string;
+};
