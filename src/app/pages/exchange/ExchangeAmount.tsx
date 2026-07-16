@@ -30,7 +30,7 @@ export function ExchangeAmountPage() {
   return (
     <div className="relative size-full bg-white">
       <StatusBar dark background="#ffffff" />
-      <TopBar dark title="Intercambiar" onBack={() => navigate("/perfil")} />
+      <TopBar dark title="Intercambiar" onBack={() => navigate("/mas")} />
       <form onSubmit={handleSubmit} className="absolute top-[112px] left-0 right-0 bottom-0 px-[24px] flex flex-col gap-[16px]">
         <div className="flex flex-col items-center gap-[8px] py-[24px]">
           <p className="font-['Sora:Regular',sans-serif] text-[14px] text-[#78838d]">¿Cuántos pesos querés convertir a dólares?</p>

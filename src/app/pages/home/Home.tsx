@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import { Bell, ArrowDownToLine, ArrowUpFromLine, ArrowLeftRight, Receipt, ChevronRight } from "lucide-react";
 import { useAuth } from "@/app/store/AuthContext";
 import { useWallet } from "@/app/store/useWallet";
+import { useNotifications } from "@/app/store/NotificationsContext";
 import { StatusBar } from "@/app/components/layout/StatusBar";
 import { BottomNav } from "@/app/components/layout/BottomNav";
 import { formatCurrency } from "@/app/lib/format";
@@ -11,6 +12,7 @@ export function HomePage() {
   const navigate = useNavigate();
   const { state } = useAuth();
   const { account, transactions } = useWallet();
+  const { unreadCount } = useNotifications();
   const recent = transactions.slice(0, 3);
   const initials = state.user?.avatarInitials ?? "?";
   const firstName = state.user?.firstName ?? "";
@@ -26,8 +28,13 @@ export function HomePage() {
             </div>
             <p className="font-['Sora:Bold',sans-serif] text-[14px] text-white">¡Hola, {firstName}!</p>
           </div>
-          <button type="button" aria-label="Notificaciones" onClick={() => navigate("/notificaciones")} className="cursor-pointer">
+          <button type="button" aria-label="Notificaciones" onClick={() => navigate("/notificaciones")} className="relative cursor-pointer">
             <Bell size={24} color="#ffffff" />
+            {unreadCount > 0 && (
+              <span className="absolute -top-[2px] -right-[2px] min-w-[16px] h-[16px] px-[3px] rounded-full bg-[#191919] text-white text-[10px] font-['Sora:Bold',sans-serif] flex items-center justify-center">
+                {unreadCount > 9 ? "9+" : unreadCount}
+              </span>
+            )}
           </button>
         </div>
 

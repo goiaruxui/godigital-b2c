@@ -27,7 +27,9 @@ const NAV_GROUPS: { label: string; paths: { path: string; label: string }[] }[] 
     { path: "/transfer", label: "Transferir" },
     { path: "/qr", label: "QR" },
     { path: "/cards", label: "Tarjetas" },
+    { path: "/mas", label: "Más" },
     { path: "/perfil", label: "Perfil" },
+    { path: "/notificaciones", label: "Notif." },
   ] },
   { label: "Servicios / Crédito", paths: [
     { path: "/buscar-servicio-full", label: "Pagar servicio" },

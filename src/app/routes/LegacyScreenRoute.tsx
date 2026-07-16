@@ -31,16 +31,9 @@ import LoginFaceId2Import from "@/imports/LoginFaceId2/index";
 /* ── Buscar / directorio de servicios (entrada a Pago Servicio) ── */
 import BuscarServicioFull from "@/imports/BuscarServicio1-1/index";
 
-/* ── Perfil ── */
-import PerfilImport from "@/imports/Perfil/index";
-
 /* ── FAQs ── */
 import FaQs1Import from "@/imports/FaQs1/index";
 import FaQs2Import from "@/imports/FaQs2/index";
-
-/* ── Notificaciones (push) ── */
-import NotificacionesImport from "@/imports/Notificaciones/index";
-import NotificacionesEmptyImport from "@/imports/Notificaciones-1/index";
 
 /* ═══════════════════════════════════
    SHARED PRIMITIVES
@@ -96,44 +89,6 @@ function WalkthroughScreen({
       <div className="absolute cursor-pointer" style={{ top: 44, left: 0, right: 0, bottom: 180 }} onClick={onNext} />
       <div className="absolute cursor-pointer" style={{ bottom: 75, left: 16, right: 16, height: 45 }} onClick={onRegister} />
       <div className="absolute cursor-pointer" style={{ bottom: 22, left: 16, right: 16, height: 45 }} onClick={onLogin} />
-    </div>
-  );
-}
-
-function PerfilWrapper({
-  onBack,
-  onLogout,
-  onPrestamos,
-  onIntercambio,
-  onFaqs,
-  onAdelantos,
-}: {
-  onBack: () => void;
-  onLogout: () => void;
-  onPrestamos: () => void;
-  onIntercambio: () => void;
-  onFaqs: () => void;
-  onAdelantos: () => void;
-}) {
-  return (
-    <div className="relative w-full h-full">
-      <PerfilImport />
-      <div className="absolute cursor-pointer" style={{ top: 44, left: 0, width: 120, height: 44 }} onClick={onBack} />
-      <div className="absolute cursor-pointer" style={{ top: 256, left: 0, right: 0, height: 56 }} onClick={onIntercambio} />
-      <div className="absolute cursor-pointer" style={{ top: 312, left: 0, right: 0, height: 56 }} onClick={onPrestamos} />
-      <div className="absolute cursor-pointer" style={{ top: 368, left: 0, right: 0, height: 56 }} onClick={onAdelantos} />
-      <div className="absolute cursor-pointer" style={{ top: 424, left: 0, right: 0, height: 56 }} onClick={onFaqs} />
-      <div className="absolute cursor-pointer" style={{ top: 480, left: 0, right: 0, height: 56 }} onClick={onLogout} />
-    </div>
-  );
-}
-
-function NotificacionesWrapper({ onBack, onClear }: { onBack: () => void; onClear: () => void }) {
-  return (
-    <div className="relative w-full h-full">
-      <NotificacionesImport />
-      <div className="absolute cursor-pointer" style={{ top: 44, left: 0, width: 120, height: 44 }} onClick={onBack} />
-      <div className="absolute cursor-pointer" style={{ top: 88, right: 16, width: 84, height: 36 }} onClick={onClear} />
     </div>
   );
 }
@@ -326,34 +281,12 @@ export function LegacyScreenRoute() {
         />
       );
 
-    /* Perfil */
-    case "perfil":
-      return (
-        <PerfilWrapper
-          onBack={() => navigate("/home")}
-          onLogout={() => {
-            auth.logout();
-            navigate("/login");
-          }}
-          onPrestamos={() => navigate("/prestamos")}
-          onIntercambio={() => navigate("/intercambio")}
-          onFaqs={() => nav("faqs")}
-          onAdelantos={() => navigate("/adelantos")}
-        />
-      );
-
-    /* Notificaciones (push) */
-    case "notificaciones":
-      return <NotificacionesWrapper onBack={() => navigate("/home")} onClear={() => nav("notificaciones-empty")} />;
-    case "notificaciones-empty":
-      return <SimpleWrapper Comp={NotificacionesEmptyImport} onBack={() => navigate("/home")} />;
-
     /* FAQs */
     case "faqs":
       return (
         <SimpleWrapper
           Comp={FaQs1Import}
-          onBack={() => nav("perfil")}
+          onBack={() => navigate("/mas")}
           extraOverlay={<div className="absolute cursor-pointer" style={{ top: 239, left: 0, right: 0, height: 52 }} onClick={() => nav("faqs-detalle")} />}
         />
       );

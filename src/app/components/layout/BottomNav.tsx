@@ -6,7 +6,7 @@ const TABS = [
   { path: "/activity", label: "Actividad", icon: Receipt },
   { path: "/qr", label: "QR", icon: QrCode, center: true },
   { path: "/cards", label: "Tarjetas", icon: CreditCard },
-  { path: "/perfil", label: "Más", icon: Menu },
+  { path: "/mas", label: "Más", icon: Menu },
 ];
 
 export function BottomNav() {

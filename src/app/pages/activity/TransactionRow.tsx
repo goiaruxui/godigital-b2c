@@ -1,6 +1,6 @@
 import type { Transaction } from "@/app/store/types";
 import { formatCurrency, formatDateTime } from "@/app/lib/format";
-import { TRANSACTION_META } from "./transactionMeta";
+import { TRANSACTION_META } from "@/app/lib/transactionMeta";
 
 export function TransactionRow({ transaction, onClick }: { transaction: Transaction; onClick?: () => void }) {
   const meta = TRANSACTION_META[transaction.type];

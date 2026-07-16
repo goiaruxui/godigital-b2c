@@ -64,6 +64,14 @@ export type Transaction = {
   createdAt: string;
 };
 
+export type Notification = {
+  id: string;
+  title: string;
+  body: string;
+  createdAt: string;
+  read: boolean;
+};
+
 export type CreditProductKind = "loan" | "advance";
 
 export type CreditProduct = {

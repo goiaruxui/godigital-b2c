@@ -28,6 +28,8 @@ type Action =
   | { type: "COMPLETE_REGISTRATION" }
   | { type: "LOGIN" }
   | { type: "LOGOUT" }
+  | { type: "UPDATE_PROFILE"; firstName: string; lastName: string }
+  | { type: "CHANGE_PASSWORD"; password: string }
   | { type: "RESTORE"; payload: AuthState };
 
 function reducer(state: AuthState, action: Action): AuthState {
@@ -59,6 +61,16 @@ function reducer(state: AuthState, action: Action): AuthState {
       return { ...state, status: "authenticated" };
     case "LOGOUT":
       return { ...state, status: "guest" };
+    case "UPDATE_PROFILE": {
+      if (!state.user) return state;
+      const { firstName, lastName } = action;
+      return {
+        ...state,
+        user: { ...state.user, firstName, lastName, avatarInitials: `${firstName[0] ?? ""}${lastName[0] ?? ""}`.toUpperCase() },
+      };
+    }
+    case "CHANGE_PASSWORD":
+      return state.credentials ? { ...state, credentials: { ...state.credentials, password: action.password } } : state;
     case "RESTORE":
       return action.payload;
     default:
@@ -75,6 +87,8 @@ type AuthContextValue = {
   login: (email: string, password: string) => boolean;
   loginWithBiometrics: () => boolean;
   logout: () => void;
+  updateProfile: (firstName: string, lastName: string) => void;
+  changePassword: (password: string) => void;
 };
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -109,6 +123,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return ok;
       },
       logout: () => dispatch({ type: "LOGOUT" }),
+      updateProfile: (firstName, lastName) => dispatch({ type: "UPDATE_PROFILE", firstName, lastName }),
+      changePassword: (password) => dispatch({ type: "CHANGE_PASSWORD", password }),
     }),
     [state],
   );

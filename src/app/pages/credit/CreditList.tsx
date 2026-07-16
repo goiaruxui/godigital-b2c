@@ -17,7 +17,7 @@ export function CreditListPage({ kind }: { kind: CreditProductKind }) {
   return (
     <div className="relative size-full bg-white">
       <StatusBar dark background="#ffffff" />
-      <TopBar dark title={config.labelPlural} onBack={() => navigate("/perfil")} />
+      <TopBar dark title={config.labelPlural} onBack={() => navigate("/mas")} />
       <div className="absolute top-[112px] left-0 right-0 bottom-0 px-[16px] overflow-y-auto flex flex-col gap-[16px] pb-[24px]">
         {items.length === 0 ? (
           <p className="font-['Sora:Regular',sans-serif] text-[13px] text-[#78838d] text-center py-[32px]">

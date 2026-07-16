@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router";
 import { useWallet } from "@/app/store/useWallet";
 import { formatCurrency, formatDateTime } from "@/app/lib/format";
-import { TRANSACTION_META } from "./transactionMeta";
+import { TRANSACTION_META } from "@/app/lib/transactionMeta";
 import { ActivityPage } from "./Activity";
 import { useRedirect } from "@/app/lib/useRedirect";
 

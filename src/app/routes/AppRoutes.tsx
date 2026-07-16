@@ -33,6 +33,11 @@ import { PrestamosListPage, PrestamosSimulatePage, PrestamosConfirmPage, Prestam
 import { AdelantosListPage, AdelantosSimulatePage, AdelantosConfirmPage, AdelantoDetailPage } from "@/app/pages/credit/Adelantos";
 import { ExchangeAmountPage } from "@/app/pages/exchange/ExchangeAmount";
 import { ExchangeConfirmPage } from "@/app/pages/exchange/ExchangeConfirm";
+import { MorePage } from "@/app/pages/more/More";
+import { ProfilePage } from "@/app/pages/profile/Profile";
+import { ProfileEditPage } from "@/app/pages/profile/ProfileEdit";
+import { ProfilePasswordPage } from "@/app/pages/profile/ProfilePassword";
+import { NotificationsPage } from "@/app/pages/notifications/Notifications";
 
 function RequireAuth({ children }: { children: ReactNode }) {
   const { state } = useAuth();
@@ -151,8 +156,15 @@ export function AppRoutes() {
       <Route path="/intercambio" element={<RequireAuth><ExchangeAmountPage /></RequireAuth>} />
       <Route path="/intercambio/confirmar" element={<RequireAuth><ExchangeConfirmPage /></RequireAuth>} />
 
-      {/* Todo lo demás (onboarding, identidad, FAQs, perfil, notificaciones):
-          se sirve desde el switch legado hasta que le llegue su fase. */}
+      {/* Más / Perfil / Notificaciones */}
+      <Route path="/mas" element={<RequireAuth><MorePage /></RequireAuth>} />
+      <Route path="/perfil" element={<RequireAuth><ProfilePage /></RequireAuth>} />
+      <Route path="/perfil/editar" element={<RequireAuth><ProfileEditPage /></RequireAuth>} />
+      <Route path="/perfil/contrasena" element={<RequireAuth><ProfilePasswordPage /></RequireAuth>} />
+      <Route path="/notificaciones" element={<RequireAuth><NotificationsPage /></RequireAuth>} />
+
+      {/* Todo lo demás (onboarding, identidad, FAQs): se sirve desde el
+          switch legado hasta que le llegue su fase. */}
       <Route path="/:legacyId" element={<LegacyScreenRoute />} />
 
       <Route path="*" element={<Navigate to="/" replace />} />
