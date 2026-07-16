@@ -10,9 +10,23 @@ function randomDigits(length: number) {
   return out;
 }
 
+function makeCard(id: string, label: string, kind: Card["kind"], bin: string, monthlyLimit: number): Card {
+  const cardNumber = bin + randomDigits(16 - bin.length);
+  return {
+    id,
+    label,
+    kind,
+    cardNumber,
+    last4: cardNumber.slice(-4),
+    paused: false,
+    pin: "1234",
+    monthlyLimit,
+  };
+}
+
 const defaultCards: Card[] = [
-  { id: "card-prepaga", label: "Gollet PREPAGA", kind: "prepaga", last4: randomDigits(4), paused: false },
-  { id: "card-credito", label: "Mastercard crédito", kind: "credito", last4: randomDigits(4), paused: false },
+  makeCard("card-prepaga", "Gollet PREPAGA", "prepaga", "4517", 150000),
+  makeCard("card-credito", "Mastercard crédito", "credito", "5299", 300000),
 ];
 
 const initialState: AccountState = {
@@ -26,6 +40,8 @@ type Action =
   | { type: "CREDIT"; amount: number }
   | { type: "DEBIT"; amount: number }
   | { type: "TOGGLE_CARD_PAUSE"; cardId: string }
+  | { type: "SET_CARD_PIN"; cardId: string; pin: string }
+  | { type: "SET_CARD_LIMIT"; cardId: string; monthlyLimit: number }
   | { type: "RESTORE"; payload: AccountState };
 
 function reducer(state: AccountState, action: Action): AccountState {
@@ -38,6 +54,16 @@ function reducer(state: AccountState, action: Action): AccountState {
       return {
         ...state,
         cards: state.cards.map((c) => (c.id === action.cardId ? { ...c, paused: !c.paused } : c)),
+      };
+    case "SET_CARD_PIN":
+      return {
+        ...state,
+        cards: state.cards.map((c) => (c.id === action.cardId ? { ...c, pin: action.pin } : c)),
+      };
+    case "SET_CARD_LIMIT":
+      return {
+        ...state,
+        cards: state.cards.map((c) => (c.id === action.cardId ? { ...c, monthlyLimit: action.monthlyLimit } : c)),
       };
     case "RESTORE":
       return action.payload;
@@ -52,6 +78,8 @@ type AccountContextValue = {
   debit: (amount: number) => void;
   canAfford: (amount: number) => boolean;
   toggleCardPause: (cardId: string) => void;
+  setCardPin: (cardId: string, pin: string) => void;
+  setCardLimit: (cardId: string, monthlyLimit: number) => void;
 };
 
 const AccountContext = createContext<AccountContextValue | null>(null);
@@ -70,6 +98,8 @@ export function AccountProvider({ children }: { children: ReactNode }) {
       debit: (amount) => dispatch({ type: "DEBIT", amount }),
       canAfford: (amount) => amount <= state.balance,
       toggleCardPause: (cardId) => dispatch({ type: "TOGGLE_CARD_PAUSE", cardId }),
+      setCardPin: (cardId, pin) => dispatch({ type: "SET_CARD_PIN", cardId, pin }),
+      setCardLimit: (cardId, monthlyLimit) => dispatch({ type: "SET_CARD_LIMIT", cardId, monthlyLimit }),
     }),
     [state],
   );

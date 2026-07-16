@@ -30,8 +30,11 @@ export type Card = {
   id: string;
   label: string;
   kind: CardKind;
+  cardNumber: string;
   last4: string;
   paused: boolean;
+  pin: string;
+  monthlyLimit: number;
 };
 
 export type AccountState = {

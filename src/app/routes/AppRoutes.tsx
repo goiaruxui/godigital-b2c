@@ -25,6 +25,10 @@ import { QrConfirmPage } from "@/app/pages/qr/QrConfirm";
 import { ServiceFormPage } from "@/app/pages/services/ServiceForm";
 import { ServiceConfirmPage } from "@/app/pages/services/ServiceConfirm";
 import { PaymentSuccessPage } from "@/app/pages/shared/PaymentSuccess";
+import { CardsListPage } from "@/app/pages/cards/CardsList";
+import { CardDetailPage } from "@/app/pages/cards/CardDetail";
+import { CardPinPage } from "@/app/pages/cards/CardPin";
+import { CardLimitPage } from "@/app/pages/cards/CardLimit";
 
 function RequireAuth({ children }: { children: ReactNode }) {
   const { state } = useAuth();
@@ -121,9 +125,15 @@ export function AppRoutes() {
       {/* Resultado genérico de un movimiento de dinero */}
       <Route path="/payment-success" element={<RequireAuth><PaymentSuccessPage /></RequireAuth>} />
 
-      {/* Todo lo demás (onboarding, identidad, tarjetas, préstamos,
-          adelantos, intercambio, FAQs, perfil, notificaciones):
-          se sirve desde el switch legado hasta que le llegue su fase. */}
+      {/* Tarjetas */}
+      <Route path="/cards" element={<RequireAuth><CardsListPage /></RequireAuth>} />
+      <Route path="/cards/:cardId" element={<RequireAuth><CardDetailPage /></RequireAuth>} />
+      <Route path="/cards/:cardId/pin" element={<RequireAuth><CardPinPage /></RequireAuth>} />
+      <Route path="/cards/:cardId/limit" element={<RequireAuth><CardLimitPage /></RequireAuth>} />
+
+      {/* Todo lo demás (onboarding, identidad, préstamos, adelantos,
+          intercambio, FAQs, perfil, notificaciones): se sirve desde el
+          switch legado hasta que le llegue su fase. */}
       <Route path="/:legacyId" element={<LegacyScreenRoute />} />
 
       <Route path="*" element={<Navigate to="/" replace />} />

@@ -1,4 +1,6 @@
-const PREFIX = "gdi:v1:";
+// Bump this whenever a stored shape changes incompatibly — old keys are
+// simply orphaned (not migrated), which is fine before there are real users.
+const PREFIX = "gdi:v2:";
 
 export function loadState<T>(key: string, fallback: T): T {
   try {
