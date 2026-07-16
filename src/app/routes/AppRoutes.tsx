@@ -16,6 +16,15 @@ import { TransactionDetailSheet } from "@/app/pages/activity/TransactionDetail";
 import { CashInMethodSheet } from "@/app/pages/cashin/CashInMethod";
 import { CashInAmountPage } from "@/app/pages/cashin/CashInAmount";
 import { CashInCvuPage } from "@/app/pages/cashin/CashInCvu";
+import { TransferRecipientPage } from "@/app/pages/transfer/TransferRecipient";
+import { TransferAmountPage } from "@/app/pages/transfer/TransferAmount";
+import { TransferConfirmPage } from "@/app/pages/transfer/TransferConfirm";
+import { QrScanPage } from "@/app/pages/qr/QrScan";
+import { QrAmountPage } from "@/app/pages/qr/QrAmount";
+import { QrConfirmPage } from "@/app/pages/qr/QrConfirm";
+import { ServiceFormPage } from "@/app/pages/services/ServiceForm";
+import { ServiceConfirmPage } from "@/app/pages/services/ServiceConfirm";
+import { PaymentSuccessPage } from "@/app/pages/shared/PaymentSuccess";
 
 function RequireAuth({ children }: { children: ReactNode }) {
   const { state } = useAuth();
@@ -95,8 +104,25 @@ export function AppRoutes() {
         }
       />
 
-      {/* Todo lo demás (onboarding, identidad, transferencias, QR, tarjetas,
-          préstamos, adelantos, intercambio, FAQs, perfil, notificaciones):
+      {/* Transferencias */}
+      <Route path="/transfer" element={<RequireAuth><TransferRecipientPage /></RequireAuth>} />
+      <Route path="/transfer-amount" element={<RequireAuth><TransferAmountPage /></RequireAuth>} />
+      <Route path="/transfer-confirm" element={<RequireAuth><TransferConfirmPage /></RequireAuth>} />
+
+      {/* Pago QR */}
+      <Route path="/qr" element={<RequireAuth><QrScanPage /></RequireAuth>} />
+      <Route path="/qr-amount" element={<RequireAuth><QrAmountPage /></RequireAuth>} />
+      <Route path="/qr-confirm" element={<RequireAuth><QrConfirmPage /></RequireAuth>} />
+
+      {/* Pago de servicios */}
+      <Route path="/servicio-datos" element={<RequireAuth><ServiceFormPage /></RequireAuth>} />
+      <Route path="/servicio-confirm" element={<RequireAuth><ServiceConfirmPage /></RequireAuth>} />
+
+      {/* Resultado genérico de un movimiento de dinero */}
+      <Route path="/payment-success" element={<RequireAuth><PaymentSuccessPage /></RequireAuth>} />
+
+      {/* Todo lo demás (onboarding, identidad, tarjetas, préstamos,
+          adelantos, intercambio, FAQs, perfil, notificaciones):
           se sirve desde el switch legado hasta que le llegue su fase. */}
       <Route path="/:legacyId" element={<LegacyScreenRoute />} />
 

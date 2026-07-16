@@ -25,7 +25,7 @@ const NAV_GROUPS: { label: string; paths: { path: string; label: string }[] }[] 
     { path: "/activity", label: "Actividad" },
     { path: "/cashin", label: "Ingresar" },
     { path: "/transfer", label: "Transferir" },
-    { path: "/qr-scan1", label: "QR" },
+    { path: "/qr", label: "QR" },
     { path: "/cards", label: "Tarjetas" },
     { path: "/perfil", label: "Perfil" },
   ] },

@@ -3,6 +3,7 @@ import { useWallet } from "@/app/store/useWallet";
 import { formatCurrency, formatDateTime } from "@/app/lib/format";
 import { TRANSACTION_META } from "./transactionMeta";
 import { ActivityPage } from "./Activity";
+import { useRedirect } from "@/app/lib/useRedirect";
 
 export function TransactionDetailSheet() {
   const navigate = useNavigate();
@@ -10,10 +11,8 @@ export function TransactionDetailSheet() {
   const { transactions } = useWallet();
   const transaction = transactions.find((t) => t.id === id);
 
-  if (!transaction) {
-    navigate("/activity", { replace: true });
-    return null;
-  }
+  useRedirect(!transaction, "/activity");
+  if (!transaction) return null;
 
   const meta = TRANSACTION_META[transaction.type];
   const Icon = meta.icon;

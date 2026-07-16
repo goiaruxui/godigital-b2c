@@ -48,7 +48,7 @@ export function HomePage() {
               <ArrowDownToLine size={16} color="#ffffff" />
               <p className="font-['Sora:Regular',sans-serif] text-[12px] text-white">Ingresar</p>
             </button>
-            <button type="button" onClick={() => navigate("/qr-scan1")} className="flex flex-col items-center gap-[8px] cursor-pointer">
+            <button type="button" onClick={() => navigate("/qr")} className="flex flex-col items-center gap-[8px] cursor-pointer">
               <ArrowUpFromLine size={16} color="#ffffff" />
               <p className="font-['Sora:Regular',sans-serif] text-[12px] text-white">Retirar</p>
             </button>

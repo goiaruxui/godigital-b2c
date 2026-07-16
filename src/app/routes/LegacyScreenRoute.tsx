@@ -93,36 +93,9 @@ import PrestamosVigentesImport from "@/imports/PrestamosVigentes/index";
 import NuevoPrestamosImport from "@/imports/NuevoPrestamos/index";
 import PrestamosFinalizadosImport from "@/imports/PrestamosFinalizados/index";
 
-/* ── Pago Servicio ── */
-import BuscarServicio2Import from "@/imports/BuscarServicio2/index";
-import BuscarServicio3Import from "@/imports/BuscarServicio3/index";
-import Loading3Import from "@/imports/Loading-3/index";
-import PagoServicioSelectCardImport from "@/imports/PagoServicioSelectCard/index";
-import PagoServicioSelectCardProcessingImport from "@/imports/PagoServicioSelectCardProcessing/index";
-import PagoServicioSuccessImport from "@/imports/PagoServicioSuccess/index";
-
 /* ── Notificaciones (push) ── */
 import NotificacionesImport from "@/imports/Notificaciones/index";
 import NotificacionesEmptyImport from "@/imports/Notificaciones-1/index";
-
-/* ── Transferencia ── */
-import TransferImport from "@/imports/Transfer/index";
-import Transferir5Import from "@/imports/Transferir-5/index";
-import Transferir6Import from "@/imports/Transferir-6/index";
-import BottomSheet2Import from "@/imports/BottomSheet-2/index";
-import Transferir1Import from "@/imports/Transferir-1/index";
-import Transferir2Import from "@/imports/Transferir-2/index";
-import Transferir3Import from "@/imports/Transferir-3/index";
-import Transferir4Import from "@/imports/Transferir-4/index";
-import TransferSuccessImport from "@/imports/TransferSuccess/index";
-
-/* ── Pago QR ── */
-import QrScan1Import from "@/imports/PagoQrScan1/index";
-import QrScan2Import from "@/imports/PagoQrScan2/index";
-import QrLoadingImport from "@/imports/Loading-2/index";
-import QrSelectCardImport from "@/imports/PagoQrSelectCard/index";
-import QrProcessingImport from "@/imports/PagoQrSelectCardProcessing/index";
-import QrSuccessImport from "@/imports/PagoQrSuccess/index";
 
 /* ═══════════════════════════════════
    SHARED PRIMITIVES
@@ -232,140 +205,6 @@ function PerfilWrapper({
       <div className="absolute cursor-pointer" style={{ top: 368, left: 0, right: 0, height: 56 }} onClick={onAdelantos} />
       <div className="absolute cursor-pointer" style={{ top: 424, left: 0, right: 0, height: 56 }} onClick={onFaqs} />
       <div className="absolute cursor-pointer" style={{ top: 480, left: 0, right: 0, height: 56 }} onClick={onLogout} />
-    </div>
-  );
-}
-
-function QrScanWrapper({ Comp, onBack, onScan }: { Comp: React.ComponentType; onBack: () => void; onScan: () => void }) {
-  return (
-    <div className="relative w-full h-full">
-      <Comp />
-      <div className="absolute cursor-pointer" style={{ top: 44, left: 0, width: 120, height: 44 }} onClick={onBack} />
-      <div className="absolute cursor-pointer" style={{ top: 140, left: 60, right: 60, bottom: 100 }} onClick={onScan} />
-    </div>
-  );
-}
-
-function QrSelectCardWrapper({ onBack, onConfirm }: { onBack: () => void; onConfirm: () => void }) {
-  const sheetHeight = 384;
-  const sheetTop = 800 - sheetHeight;
-  return (
-    <div className="relative w-full h-full">
-      <QrSelectCardImport />
-      <div className="absolute cursor-pointer" style={{ top: 44, left: 0, width: 120, height: 44 }} onClick={onBack} />
-      <div className="absolute cursor-pointer" style={{ top: sheetTop + sheetHeight - 40 - 45, left: 16, right: 16, height: 45 }} onClick={onConfirm} />
-    </div>
-  );
-}
-
-function QrProcessingWrapper({ onBack, onConfirm }: { onBack: () => void; onConfirm: () => void }) {
-  const sheetHeight = 384;
-  const sheetTop = 800 - sheetHeight;
-  return (
-    <div className="relative w-full h-full">
-      <QrProcessingImport />
-      <div className="absolute cursor-pointer" style={{ top: 44, left: 0, width: 120, height: 44 }} onClick={onBack} />
-      <div className="absolute cursor-pointer" style={{ top: sheetTop + sheetHeight - 40 - 45, left: 16, right: 16, height: 45 }} onClick={onConfirm} />
-    </div>
-  );
-}
-
-function QrSuccessWrapper({ onHome }: { onHome: () => void }) {
-  return (
-    <div className="relative w-full h-full">
-      <QrSuccessImport />
-      <div className="absolute cursor-pointer" style={{ bottom: 40 + 8 + 45, left: 16, right: 16, height: 45 }} onClick={onHome} />
-      <div className="absolute cursor-pointer" style={{ bottom: 40, left: 16, right: 16, height: 45 }} onClick={onHome} />
-    </div>
-  );
-}
-
-function TransferContactWrapper({ onBack, onCBU, onContact }: { onBack: () => void; onCBU: () => void; onContact: () => void }) {
-  return (
-    <div className="relative w-full h-full">
-      <TransferImport />
-      <div className="absolute cursor-pointer" style={{ top: 44, left: 0, width: 120, height: 44 }} onClick={onBack} />
-      <div className="absolute cursor-pointer" style={{ top: 140, left: 16, right: 16, height: 64 }} onClick={onCBU} />
-      <div className="absolute cursor-pointer" style={{ top: 380, left: 16, right: 16, height: 320 }} onClick={onContact} />
-    </div>
-  );
-}
-
-function TransferAliasEmptyWrapper({ onBack, onFill }: { onBack: () => void; onFill: () => void }) {
-  return (
-    <div className="relative w-full h-full">
-      <Transferir5Import />
-      <div className="absolute cursor-pointer" style={{ top: 44, left: 0, width: 120, height: 44 }} onClick={onBack} />
-      <div className="absolute cursor-pointer" style={{ top: 140, left: 16, right: 16, height: 50 }} onClick={onFill} />
-    </div>
-  );
-}
-
-function TransferAliasFilledWrapper({ onBack, onValidate }: { onBack: () => void; onValidate: () => void }) {
-  return (
-    <div className="relative w-full h-full">
-      <Transferir6Import />
-      <div className="absolute cursor-pointer" style={{ top: 44, left: 0, width: 120, height: 44 }} onClick={onBack} />
-      <div className="absolute cursor-pointer" style={{ top: 477, left: 16, right: 16, height: 45 }} onClick={onValidate} />
-    </div>
-  );
-}
-
-function TransferRecipientWrapper({ onClose, onContinue }: { onClose: () => void; onContinue: () => void }) {
-  return (
-    <div className="relative w-full h-full">
-      <BottomSheet2Import />
-      <div className="absolute cursor-pointer" style={{ top: 16, right: 16, width: 64, height: 44 }} onClick={onClose} />
-      <div className="absolute cursor-pointer" style={{ bottom: 58, left: 16, right: 16, height: 45 }} onClick={onContinue} />
-    </div>
-  );
-}
-
-function TransferAmountEmptyWrapper({ onBack, onFill }: { onBack: () => void; onFill: () => void }) {
-  return (
-    <div className="relative w-full h-full">
-      <Transferir1Import />
-      <div className="absolute cursor-pointer" style={{ top: 44, left: 0, width: 120, height: 44 }} onClick={onBack} />
-      <div className="absolute cursor-pointer" style={{ top: 180, left: 40, right: 40, height: 130 }} onClick={onFill} />
-    </div>
-  );
-}
-
-function TransferAmountFilledWrapper({ onBack, onContinue }: { onBack: () => void; onContinue: () => void }) {
-  return (
-    <div className="relative w-full h-full">
-      <Transferir2Import />
-      <div className="absolute cursor-pointer" style={{ top: 44, left: 0, width: 120, height: 44 }} onClick={onBack} />
-      <div className="absolute cursor-pointer" style={{ top: 484, left: 16, right: 16, height: 45 }} onClick={onContinue} />
-    </div>
-  );
-}
-
-function TransferConfirmWrapper({ onBack, onSlide }: { onBack: () => void; onSlide: () => void }) {
-  return (
-    <div className="relative w-full h-full">
-      <Transferir3Import />
-      <div className="absolute cursor-pointer" style={{ top: 44, left: 0, width: 120, height: 44 }} onClick={onBack} />
-      <div className="absolute cursor-pointer" style={{ bottom: 40, left: 16, right: 16, height: 45 }} onClick={onSlide} />
-    </div>
-  );
-}
-
-function TransferProcessingWrapper({ onBack, onSlide }: { onBack: () => void; onSlide: () => void }) {
-  return (
-    <div className="relative w-full h-full">
-      <Transferir4Import />
-      <div className="absolute cursor-pointer" style={{ top: 44, left: 0, width: 120, height: 44 }} onClick={onBack} />
-      <div className="absolute cursor-pointer" style={{ bottom: 40, left: 16, right: 16, height: 45 }} onClick={onSlide} />
-    </div>
-  );
-}
-
-function TransferSuccessScreen({ onHome }: { onHome: () => void }) {
-  return (
-    <div className="relative w-full h-full">
-      <TransferSuccessImport />
-      <div className="absolute cursor-pointer" style={{ bottom: 40, left: 16, right: 16, height: 45 }} onClick={onHome} />
     </div>
   );
 }
@@ -654,7 +493,7 @@ export function LegacyScreenRoute() {
         <SimpleWrapper
           Comp={BuscarServicioFull}
           onBack={() => navigate("/home")}
-          extraOverlay={<div className="absolute cursor-pointer" style={{ top: 170, left: 0, right: 0, height: 64 }} onClick={() => nav("servicio-datos-empty")} />}
+          extraOverlay={<div className="absolute cursor-pointer" style={{ top: 170, left: 0, right: 0, height: 64 }} onClick={() => navigate("/servicio-datos")} />}
         />
       );
 
@@ -674,40 +513,6 @@ export function LegacyScreenRoute() {
         />
       );
 
-    /* Pago QR */
-    case "qr-scan1":
-      return <QrScanWrapper Comp={QrScan1Import} onBack={() => navigate("/home")} onScan={() => nav("qr-scan2")} />;
-    case "qr-scan2":
-      return <QrScanWrapper Comp={QrScan2Import} onBack={() => nav("qr-scan1")} onScan={() => nav("qr-loading")} />;
-    case "qr-loading":
-      return <AutoScreen Comp={QrLoadingImport} onDone={() => nav("qr-select-card")} />;
-    case "qr-select-card":
-      return <QrSelectCardWrapper onBack={() => nav("qr-scan2")} onConfirm={() => nav("qr-processing")} />;
-    case "qr-processing":
-      return <QrProcessingWrapper onBack={() => nav("qr-select-card")} onConfirm={() => nav("qr-success")} />;
-    case "qr-success":
-      return <QrSuccessWrapper onHome={() => navigate("/home")} />;
-
-    /* Transferencia */
-    case "transfer":
-      return <TransferContactWrapper onBack={() => navigate("/home")} onCBU={() => nav("transfer-alias-empty")} onContact={() => nav("transfer-recipient-sheet")} />;
-    case "transfer-alias-empty":
-      return <TransferAliasEmptyWrapper onBack={() => nav("transfer")} onFill={() => nav("transfer-alias-filled")} />;
-    case "transfer-alias-filled":
-      return <TransferAliasFilledWrapper onBack={() => nav("transfer-alias-empty")} onValidate={() => nav("transfer-recipient-sheet")} />;
-    case "transfer-recipient-sheet":
-      return <TransferRecipientWrapper onClose={() => nav("transfer")} onContinue={() => nav("transfer-amount-empty")} />;
-    case "transfer-amount-empty":
-      return <TransferAmountEmptyWrapper onBack={() => nav("transfer-recipient-sheet")} onFill={() => nav("transfer-amount-filled")} />;
-    case "transfer-amount-filled":
-      return <TransferAmountFilledWrapper onBack={() => nav("transfer-amount-empty")} onContinue={() => nav("transfer-confirm")} />;
-    case "transfer-confirm":
-      return <TransferConfirmWrapper onBack={() => nav("transfer-amount-filled")} onSlide={() => nav("transfer-processing")} />;
-    case "transfer-processing":
-      return <TransferProcessingWrapper onBack={() => nav("transfer-confirm")} onSlide={() => nav("transfer-success")} />;
-    case "transfer-success":
-      return <TransferSuccessScreen onHome={() => navigate("/home")} />;
-
     /* Notificaciones (push) */
     case "notificaciones":
       return <NotificacionesWrapper onBack={() => navigate("/home")} onClear={() => nav("notificaciones-empty")} />;
@@ -723,7 +528,7 @@ export function LegacyScreenRoute() {
           onCard2={() => nav("detalle-tarjeta-1")}
           onHome={() => navigate("/home")}
           onActivity={() => navigate("/activity")}
-          onQR={() => nav("qr-scan1")}
+          onQR={() => navigate("/qr")}
           onMore={() => nav("perfil")}
         />
       );
@@ -735,7 +540,7 @@ export function LegacyScreenRoute() {
           onCard2={() => nav("detalle-tarjeta-1")}
           onHome={() => navigate("/home")}
           onActivity={() => navigate("/activity")}
-          onQR={() => nav("qr-scan1")}
+          onQR={() => navigate("/qr")}
           onMore={() => nav("perfil")}
         />
       );
@@ -873,49 +678,6 @@ export function LegacyScreenRoute() {
           Comp={Success2Import}
           onBack={() => nav("detalle-tarjeta-1")}
           extraOverlay={<div className="absolute cursor-pointer" style={{ bottom: 58, left: 16, right: 16, height: 45 }} onClick={() => nav("detalle-tarjeta-1")} />}
-        />
-      );
-
-    /* Pago Servicio */
-    case "servicio-datos-empty":
-      return (
-        <SimpleWrapper
-          Comp={BuscarServicio2Import}
-          onBack={() => nav("buscar-servicio-full")}
-          extraOverlay={<div className="absolute cursor-pointer" style={{ bottom: 238, left: 0, right: 0, height: 231 }} onClick={() => nav("servicio-datos-filled")} />}
-        />
-      );
-    case "servicio-datos-filled":
-      return (
-        <SimpleWrapper
-          Comp={BuscarServicio3Import}
-          onBack={() => nav("servicio-datos-empty")}
-          extraOverlay={<div className="absolute cursor-pointer" style={{ top: 477, left: 16, right: 16, height: 45 }} onClick={() => nav("servicio-loading")} />}
-        />
-      );
-    case "servicio-loading":
-      return <AutoScreen Comp={Loading3Import} onDone={() => nav("servicio-select-card")} />;
-    case "servicio-select-card":
-      return (
-        <SimpleWrapper
-          Comp={PagoServicioSelectCardImport}
-          onBack={() => nav("buscar-servicio-full")}
-          extraOverlay={<div className="absolute cursor-pointer" style={{ bottom: 58, left: 16, right: 16, height: 45 }} onClick={() => nav("servicio-processing")} />}
-        />
-      );
-    case "servicio-processing":
-      return <AutoScreen Comp={PagoServicioSelectCardProcessingImport} onDone={() => nav("servicio-success")} />;
-    case "servicio-success":
-      return (
-        <SimpleWrapper
-          Comp={PagoServicioSuccessImport}
-          onBack={() => nav("buscar-servicio-full")}
-          extraOverlay={
-            <>
-              <div className="absolute cursor-pointer" style={{ bottom: 111, left: 16, right: 16, height: 45 }} onClick={() => navigate("/activity")} />
-              <div className="absolute cursor-pointer" style={{ bottom: 58, left: 16, right: 16, height: 45 }} onClick={() => nav("buscar-servicio-full")} />
-            </>
-          }
         />
       );
 

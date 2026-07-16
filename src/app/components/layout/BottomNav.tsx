@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router";
 const TABS = [
   { path: "/home", label: "Inicio", icon: HomeIcon },
   { path: "/activity", label: "Actividad", icon: Receipt },
-  { path: "/qr-scan1", label: "QR", icon: QrCode, center: true },
+  { path: "/qr", label: "QR", icon: QrCode, center: true },
   { path: "/cards", label: "Tarjetas", icon: CreditCard },
   { path: "/perfil", label: "Más", icon: Menu },
 ];
