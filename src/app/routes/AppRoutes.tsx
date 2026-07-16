@@ -29,6 +29,10 @@ import { CardsListPage } from "@/app/pages/cards/CardsList";
 import { CardDetailPage } from "@/app/pages/cards/CardDetail";
 import { CardPinPage } from "@/app/pages/cards/CardPin";
 import { CardLimitPage } from "@/app/pages/cards/CardLimit";
+import { PrestamosListPage, PrestamosSimulatePage, PrestamosConfirmPage, PrestamoDetailPage } from "@/app/pages/credit/Prestamos";
+import { AdelantosListPage, AdelantosSimulatePage, AdelantosConfirmPage, AdelantoDetailPage } from "@/app/pages/credit/Adelantos";
+import { ExchangeAmountPage } from "@/app/pages/exchange/ExchangeAmount";
+import { ExchangeConfirmPage } from "@/app/pages/exchange/ExchangeConfirm";
 
 function RequireAuth({ children }: { children: ReactNode }) {
   const { state } = useAuth();
@@ -131,9 +135,24 @@ export function AppRoutes() {
       <Route path="/cards/:cardId/pin" element={<RequireAuth><CardPinPage /></RequireAuth>} />
       <Route path="/cards/:cardId/limit" element={<RequireAuth><CardLimitPage /></RequireAuth>} />
 
-      {/* Todo lo demás (onboarding, identidad, préstamos, adelantos,
-          intercambio, FAQs, perfil, notificaciones): se sirve desde el
-          switch legado hasta que le llegue su fase. */}
+      {/* Préstamos */}
+      <Route path="/prestamos" element={<RequireAuth><PrestamosListPage /></RequireAuth>} />
+      <Route path="/prestamos/simular" element={<RequireAuth><PrestamosSimulatePage /></RequireAuth>} />
+      <Route path="/prestamos/confirmar" element={<RequireAuth><PrestamosConfirmPage /></RequireAuth>} />
+      <Route path="/prestamos/:id" element={<RequireAuth><PrestamoDetailPage /></RequireAuth>} />
+
+      {/* Adelantos */}
+      <Route path="/adelantos" element={<RequireAuth><AdelantosListPage /></RequireAuth>} />
+      <Route path="/adelantos/simular" element={<RequireAuth><AdelantosSimulatePage /></RequireAuth>} />
+      <Route path="/adelantos/confirmar" element={<RequireAuth><AdelantosConfirmPage /></RequireAuth>} />
+      <Route path="/adelantos/:id" element={<RequireAuth><AdelantoDetailPage /></RequireAuth>} />
+
+      {/* Intercambio */}
+      <Route path="/intercambio" element={<RequireAuth><ExchangeAmountPage /></RequireAuth>} />
+      <Route path="/intercambio/confirmar" element={<RequireAuth><ExchangeConfirmPage /></RequireAuth>} />
+
+      {/* Todo lo demás (onboarding, identidad, FAQs, perfil, notificaciones):
+          se sirve desde el switch legado hasta que le llegue su fase. */}
       <Route path="/:legacyId" element={<LegacyScreenRoute />} />
 
       <Route path="*" element={<Navigate to="/" replace />} />

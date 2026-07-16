@@ -7,6 +7,7 @@ import { Button } from "@/app/components/ui/button";
 import { ProcessingSpinner } from "@/app/pages/shared/ProcessingSpinner";
 import { formatCurrency } from "@/app/lib/format";
 import { useRedirect } from "@/app/lib/useRedirect";
+import { useCancelableTimeout } from "@/app/lib/useCancelableTimeout";
 
 type State = { recipient?: string; amount?: number };
 
@@ -17,13 +18,14 @@ export function TransferConfirmPage() {
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState("");
   const { recipient, amount } = (location.state as State | null) ?? {};
+  const schedule = useCancelableTimeout();
 
   useRedirect(!recipient || !amount, "/transfer");
   if (!recipient || !amount) return null;
 
   function handleConfirm() {
     setProcessing(true);
-    setTimeout(() => {
+    schedule(() => {
       const result = pay("transfer_out", amount!, recipient!, "Transferencia enviada");
       if (!result.ok) {
         setProcessing(false);

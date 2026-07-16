@@ -63,3 +63,16 @@ export type Transaction = {
   description: string;
   createdAt: string;
 };
+
+export type CreditProductKind = "loan" | "advance";
+
+export type CreditProduct = {
+  id: string;
+  kind: CreditProductKind;
+  amount: number;
+  installments: number;
+  monthlyRate: number;
+  monthlyPayment: number;
+  totalToPay: number;
+  createdAt: string;
+};

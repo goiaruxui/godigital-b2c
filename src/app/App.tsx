@@ -31,9 +31,9 @@ const NAV_GROUPS: { label: string; paths: { path: string; label: string }[] }[] 
   ] },
   { label: "Servicios / Crédito", paths: [
     { path: "/buscar-servicio-full", label: "Pagar servicio" },
-    { path: "/prestamos-vigentes", label: "Préstamos" },
-    { path: "/adelantos-vigentes", label: "Adelantos" },
-    { path: "/intercambio-empty", label: "Intercambio" },
+    { path: "/prestamos", label: "Préstamos" },
+    { path: "/adelantos", label: "Adelantos" },
+    { path: "/intercambio", label: "Intercambio" },
     { path: "/faqs", label: "FAQs" },
   ] },
 ];

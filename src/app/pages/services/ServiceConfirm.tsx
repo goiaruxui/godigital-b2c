@@ -7,6 +7,7 @@ import { Button } from "@/app/components/ui/button";
 import { ProcessingSpinner } from "@/app/pages/shared/ProcessingSpinner";
 import { formatCurrency } from "@/app/lib/format";
 import { useRedirect } from "@/app/lib/useRedirect";
+import { useCancelableTimeout } from "@/app/lib/useCancelableTimeout";
 
 type State = { company?: string; account?: string; amount?: number };
 
@@ -17,13 +18,14 @@ export function ServiceConfirmPage() {
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState("");
   const { company, account, amount } = (location.state as State | null) ?? {};
+  const schedule = useCancelableTimeout();
 
   useRedirect(!company || !account || !amount, "/buscar-servicio-full");
   if (!company || !account || !amount) return null;
 
   function handleConfirm() {
     setProcessing(true);
-    setTimeout(() => {
+    schedule(() => {
       const result = pay("service_payment", amount!, company!, `Pago de servicio · Cliente ${account}`);
       if (!result.ok) {
         setProcessing(false);

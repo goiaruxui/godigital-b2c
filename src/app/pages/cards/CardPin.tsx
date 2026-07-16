@@ -6,6 +6,7 @@ import { StatusBar } from "@/app/components/layout/StatusBar";
 import { TopBar } from "@/app/components/layout/TopBar";
 import { PinKeypad } from "@/app/components/cards/PinKeypad";
 import { useRedirect } from "@/app/lib/useRedirect";
+import { useCancelableTimeout } from "@/app/lib/useCancelableTimeout";
 
 const PIN_LENGTH = 4;
 
@@ -27,6 +28,7 @@ export function CardPinPage() {
   const [error, setError] = useState("");
   // Mirrors newPin synchronously so the confirm step never compares against a stale closure.
   const newPinRef = useRef("");
+  const schedule = useCancelableTimeout();
 
   useRedirect(!card, "/cards");
   if (!card) return null;
@@ -37,7 +39,7 @@ export function CardPinPage() {
       setNewPin((prev) => {
         const next = applyKey(prev, key);
         newPinRef.current = next;
-        if (next.length === PIN_LENGTH) setTimeout(() => setStage("confirm"), 150);
+        if (next.length === PIN_LENGTH) schedule(() => setStage("confirm"), 150);
         return next;
       });
       return;
@@ -45,14 +47,14 @@ export function CardPinPage() {
     setConfirmPin((prev) => {
       const next = applyKey(prev, key);
       if (next.length === PIN_LENGTH) {
-        setTimeout(() => {
+        schedule(() => {
           if (next === newPinRef.current) {
             setCardPin(card!.id, next);
             toast.success("PIN actualizado");
             navigate(`/cards/${card!.id}`);
           } else {
             setError("Los PIN no coinciden, intentá de nuevo");
-            setTimeout(() => {
+            schedule(() => {
               newPinRef.current = "";
               setNewPin("");
               setConfirmPin("");

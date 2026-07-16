@@ -8,6 +8,7 @@ import { StatusBar } from "@/app/components/layout/StatusBar";
 import { TopBar } from "@/app/components/layout/TopBar";
 import { Button } from "@/app/components/ui/button";
 import { formatCurrency } from "@/app/lib/format";
+import { useCancelableTimeout } from "@/app/lib/useCancelableTimeout";
 
 function copy(value: string) {
   navigator.clipboard?.writeText(value).then(() => toast.success("Copiado al portapapeles"));
@@ -21,11 +22,12 @@ export function CashInCvuPage() {
   const [processing, setProcessing] = useState(false);
   const numeric = Number(amount.replace(",", "."));
   const valid = numeric > 0;
+  const schedule = useCancelableTimeout();
 
   function simulateIncomingTransfer() {
     if (!valid) return;
     setProcessing(true);
-    setTimeout(() => {
+    schedule(() => {
       cashIn(numeric, "Transferencia recibida");
       toast.success(`Recibiste ${formatCurrency(numeric)}`);
       navigate("/home");

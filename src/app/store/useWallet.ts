@@ -2,7 +2,7 @@ import { useAccount } from "./AccountContext";
 import { useTransactions } from "./TransactionsContext";
 import type { TransactionType } from "./types";
 
-const DEBIT_TYPES: TransactionType[] = ["transfer_out", "qr_payment", "service_payment"];
+const DEBIT_TYPES: TransactionType[] = ["transfer_out", "qr_payment", "service_payment", "exchange"];
 
 export function useWallet() {
   const { state: account, credit, debit, canAfford, toggleCardPause } = useAccount();
