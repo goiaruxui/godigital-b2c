@@ -5,7 +5,7 @@ import { formatCurrency } from "@/app/lib/format";
 import { TRANSACTION_META } from "@/app/lib/transactionMeta";
 import type { TransactionType } from "./types";
 
-const DEBIT_TYPES: TransactionType[] = ["transfer_out", "qr_payment", "service_payment", "exchange"];
+export const DEBIT_TYPES: TransactionType[] = ["transfer_out", "qr_payment", "service_payment", "exchange"];
 
 export function useWallet() {
   const { state: account, credit, debit, canAfford, toggleCardPause } = useAccount();
