@@ -55,7 +55,7 @@ export function CreditSimulatePage({ kind }: { kind: CreditProductKind }) {
           <p className="font-['Sora:Regular',sans-serif] text-[12px] text-[#78838d]">
             Máximo disponible: {formatCurrency(config.maxAmount)}
           </p>
-          {error && <p className="text-[13px] text-[#d4183d]">{error}</p>}
+          {error && <p className="text-[13px] text-[#DF4730]">{error}</p>}
         </div>
 
         <p className="font-['Sora:Bold',sans-serif] text-[14px] text-[#191919]">Cuotas</p>
@@ -83,7 +83,7 @@ export function CreditSimulatePage({ kind }: { kind: CreditProductKind }) {
         )}
 
         <div className="flex-1" />
-        <Button type="submit" disabled={!valid} className="bg-[#df4730] hover:bg-[#df4730]/90 text-white h-[45px] rounded-[8px]">
+        <Button type="submit" disabled={!valid} className="bg-[#FF583F] hover:bg-[#DF4730] text-white h-[45px] rounded-[4px]">
           Continuar
         </Button>
       </form>

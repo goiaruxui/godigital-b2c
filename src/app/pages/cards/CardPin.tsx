@@ -4,17 +4,10 @@ import { toast } from "sonner";
 import { useAccount } from "@/app/store/AccountContext";
 import { StatusBar } from "@/app/components/layout/StatusBar";
 import { TopBar } from "@/app/components/layout/TopBar";
-import { PinKeypad } from "@/app/components/cards/PinKeypad";
 import { useRedirect } from "@/app/lib/useRedirect";
 import { useCancelableTimeout } from "@/app/lib/useCancelableTimeout";
 
 const PIN_LENGTH = 4;
-
-function applyKey(prev: string, key: string) {
-  if (key === "back") return prev.slice(0, -1);
-  if (prev.length >= PIN_LENGTH) return prev;
-  return prev + key;
-}
 
 export function CardPinPage() {
   const navigate = useNavigate();
@@ -33,38 +26,33 @@ export function CardPinPage() {
   useRedirect(!card, "/cards");
   if (!card) return null;
 
-  function handleKey(key: string) {
+  function handleChange(raw: string) {
+    const next = raw.replace(/[^0-9]/g, "").slice(0, PIN_LENGTH);
     setError("");
     if (stage === "new") {
-      setNewPin((prev) => {
-        const next = applyKey(prev, key);
-        newPinRef.current = next;
-        if (next.length === PIN_LENGTH) schedule(() => setStage("confirm"), 150);
-        return next;
-      });
+      setNewPin(next);
+      newPinRef.current = next;
+      if (next.length === PIN_LENGTH) schedule(() => setStage("confirm"), 150);
       return;
     }
-    setConfirmPin((prev) => {
-      const next = applyKey(prev, key);
-      if (next.length === PIN_LENGTH) {
-        schedule(() => {
-          if (next === newPinRef.current) {
-            setCardPin(card!.id, next);
-            toast.success("PIN actualizado");
-            navigate(`/cards/${card!.id}`);
-          } else {
-            setError("Los PIN no coinciden, intentá de nuevo");
-            schedule(() => {
-              newPinRef.current = "";
-              setNewPin("");
-              setConfirmPin("");
-              setStage("new");
-            }, 900);
-          }
-        }, 0);
-      }
-      return next;
-    });
+    setConfirmPin(next);
+    if (next.length === PIN_LENGTH) {
+      schedule(() => {
+        if (next === newPinRef.current) {
+          setCardPin(card!.id, next);
+          toast.success("PIN actualizado");
+          navigate(`/cards/${card!.id}`);
+        } else {
+          setError("Los PIN no coinciden, intentá de nuevo");
+          schedule(() => {
+            newPinRef.current = "";
+            setNewPin("");
+            setConfirmPin("");
+            setStage("new");
+          }, 900);
+        }
+      }, 0);
+    }
   }
 
   const current = stage === "new" ? newPin : confirmPin;
@@ -74,10 +62,12 @@ export function CardPinPage() {
       <StatusBar dark background="#ffffff" />
       <TopBar dark title="Cambiar PIN" onBack={() => navigate(`/cards/${card.id}`)} />
       <div className="absolute top-[112px] left-0 right-0 bottom-0 px-[24px] flex flex-col items-center gap-[32px] pt-[24px]">
-        <p className="font-['Sora:Regular',sans-serif] text-[14px] text-[#78838d] text-center">
-          {stage === "new" ? "Ingresá tu nuevo PIN de 4 dígitos" : "Confirmá el nuevo PIN"}
-        </p>
-        <div className="flex items-center gap-[12px]">
+        <div className="bg-[#EDEFF7] rounded-[4px] px-[16px] py-[12px] w-full">
+          <p className="font-['Sora:Regular',sans-serif] text-[14px] text-[#78838d] text-center">
+            {stage === "new" ? "Ingresá tu nuevo PIN de 4 dígitos" : "Confirmá el nuevo PIN"}
+          </p>
+        </div>
+        <div className="relative flex items-center gap-[12px]">
           {Array.from({ length: PIN_LENGTH }).map((_, i) => (
             <div
               key={i}
@@ -85,10 +75,19 @@ export function CardPinPage() {
               style={{ background: i < current.length ? "#df4730" : "transparent" }}
             />
           ))}
+          <input
+            key={stage}
+            autoFocus
+            inputMode="numeric"
+            type="password"
+            maxLength={PIN_LENGTH}
+            value={current}
+            onChange={(e) => handleChange(e.target.value)}
+            className="absolute inset-0 opacity-0"
+            aria-label={stage === "new" ? "Nuevo PIN" : "Confirmar PIN"}
+          />
         </div>
-        {error && <p className="text-[13px] text-[#d4183d]">{error}</p>}
-        <div className="flex-1" />
-        <PinKeypad onKey={handleKey} />
+        {error && <p className="text-[13px] text-[#DF4730]">{error}</p>}
       </div>
     </div>
   );

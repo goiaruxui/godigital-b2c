@@ -30,11 +30,11 @@ export function PaymentSuccessPage() {
         <Button
           variant="outline"
           onClick={() => navigate("/activity")}
-          className="h-[45px] rounded-[8px] border-[#df4730] text-[#df4730]"
+          className="h-[45px] rounded-[4px] border-[#DF4730] text-[#DF4730]"
         >
           Ver actividad
         </Button>
-        <Button onClick={() => navigate("/home")} className="bg-[#df4730] hover:bg-[#df4730]/90 text-white h-[45px] rounded-[8px]">
+        <Button onClick={() => navigate("/home")} className="bg-[#FF583F] hover:bg-[#DF4730] text-white h-[45px] rounded-[4px]">
           Ir al inicio
         </Button>
       </div>

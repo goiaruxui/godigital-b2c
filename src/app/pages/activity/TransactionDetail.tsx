@@ -29,10 +29,10 @@ export function TransactionDetailSheet() {
             Listo
           </button>
         </div>
-        <div className="size-[56px] rounded-full bg-[#ffe7e3] flex items-center justify-center">
-          <Icon size={24} color="#df4730" />
+        <div className={`size-[56px] rounded-full flex items-center justify-center ${isCredit ? "bg-[#E8F6EE]" : "bg-[#F7F8FE]"}`}>
+          <Icon size={24} color={isCredit ? "#289B4F" : "#191919"} />
         </div>
-        <p className={`font-['Sora:Bold',sans-serif] text-[28px] ${isCredit ? "text-[#1f9254]" : "text-[#191919]"}`}>
+        <p className={`font-['Sora:Bold',sans-serif] text-[28px] ${isCredit ? "text-[#289B4F]" : "text-[#191919]"}`}>
           {isCredit ? "+" : "-"}
           {formatCurrency(Math.abs(transaction.amount))}
         </p>

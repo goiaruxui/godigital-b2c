@@ -62,12 +62,12 @@ export function ProfilePasswordPage() {
             }}
           />
         </div>
-        {error && <p className="text-[13px] text-[#d4183d]">{error}</p>}
+        {error && <p className="text-[13px] text-[#DF4730]">{error}</p>}
         <div className="flex-1" />
         <Button
           type="submit"
           disabled={!current || next.length < 6}
-          className="bg-[#df4730] hover:bg-[#df4730]/90 text-white h-[45px] rounded-[8px] mb-[32px]"
+          className="bg-[#FF583F] hover:bg-[#DF4730] text-white h-[45px] rounded-[4px] mb-[32px]"
         >
           Guardar
         </Button>

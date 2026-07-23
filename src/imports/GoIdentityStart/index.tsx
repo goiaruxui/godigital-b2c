@@ -254,10 +254,13 @@ function Div() {
   );
 }
 
-function Buttons() {
+function Buttons({ accepted }: { accepted: boolean }) {
   return (
     <div className="content-stretch flex flex-col items-start relative shrink-0 w-full" data-name="buttons">
-      <a className="bg-[#df4730] cursor-pointer h-[45px] relative rounded-[4px] shrink-0 w-full" data-name="button">
+      <a
+        className={`h-[45px] relative rounded-[4px] shrink-0 w-full ${accepted ? "bg-[#df4730] cursor-pointer" : "bg-[#f4b3a8] cursor-not-allowed"}`}
+        data-name="button"
+      >
         <div className="flex flex-row items-center justify-center size-full">
           <div className="content-stretch flex gap-[4px] items-center justify-center p-[12px] relative size-full">
             <p className="[word-break:break-word] font-['Sora:Bold',sans-serif] leading-[1.5] not-italic relative shrink-0 text-[14px] text-center text-white whitespace-nowrap">Continuar</p>
@@ -268,25 +271,33 @@ function Buttons() {
   );
 }
 
-function Body() {
+function Body({ accepted, onToggle }: { accepted: boolean; onToggle: () => void }) {
   return (
     <div className="absolute content-stretch flex flex-col gap-[24px] inset-[44px_0_0_0] items-center pb-[40px] pt-[16px] px-[16px]" data-name="body">
       <TopBar />
       <Div />
-      <div className="content-stretch flex gap-[6px] items-center relative shrink-0 w-full" data-name="Checkbox and radio">
-        <div className="overflow-clip relative shrink-0 size-[20px]" data-name="checkbox-fill">
-          <div className="absolute inset-[12.5%]" data-name="Vector">
-            <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 15 15">
-              <path d={svgPaths.p11f10600} fill="var(--fill-0, #FF583F)" id="Vector" />
-            </svg>
-          </div>
+      <div
+        className="content-stretch flex gap-[6px] items-center relative shrink-0 w-full cursor-pointer"
+        data-name="Checkbox and radio"
+        onClick={onToggle}
+      >
+        <div className="overflow-clip relative shrink-0 size-[20px]" data-name={accepted ? "checkbox-fill" : "checkbox-empty"}>
+          {accepted ? (
+            <div className="absolute inset-[12.5%]" data-name="Vector">
+              <svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 15 15">
+                <path d={svgPaths.p11f10600} fill="var(--fill-0, #FF583F)" id="Vector" />
+              </svg>
+            </div>
+          ) : (
+            <div className="absolute inset-0 rounded-[4px] border-2 border-[#BAC2C7]" />
+          )}
         </div>
         <p className="[word-break:break-word] flex-[1_0_0] font-['Sora:Regular',sans-serif] leading-[0] min-w-px not-italic relative text-[#191919] text-[12px]">
           <span className="leading-[1.5]">{`He leído y acepto los `}</span>
           <span className="leading-[1.5] text-[#df4730]">términos y condiciones</span>
         </p>
       </div>
-      <Buttons />
+      <Buttons accepted={accepted} />
     </div>
   );
 }
@@ -384,11 +395,11 @@ function RightArea() {
   );
 }
 
-export default function GoIdentityStart() {
+export default function GoIdentityStart({ accepted, onToggle }: { accepted: boolean; onToggle: () => void }) {
   return (
     <div className="relative size-full" data-name="GOIdentity-Start">
       <div className="absolute bg-white h-[800px] left-0 overflow-clip top-0 w-[360px]" data-name="GOIdentity-Start">
-        <Body />
+        <Body accepted={accepted} onToggle={onToggle} />
         <div className="-translate-x-1/2 absolute bg-white bottom-0 content-stretch flex flex-col items-start justify-center left-1/2 w-[360px]" data-name="Navigation">
           <div className="relative shrink-0 w-full" data-name="HomeIndicator">
             <div className="flex flex-col items-center justify-center size-full">

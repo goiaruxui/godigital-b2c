@@ -38,6 +38,7 @@ import { ProfilePage } from "@/app/pages/profile/Profile";
 import { ProfileEditPage } from "@/app/pages/profile/ProfileEdit";
 import { ProfilePasswordPage } from "@/app/pages/profile/ProfilePassword";
 import { NotificationsPage } from "@/app/pages/notifications/Notifications";
+import { ComingSoonPage } from "@/app/pages/shared/ComingSoon";
 
 function RequireAuth({ children }: { children: ReactNode }) {
   const { state } = useAuth();
@@ -162,6 +163,15 @@ export function AppRoutes() {
       <Route path="/perfil/editar" element={<RequireAuth><ProfileEditPage /></RequireAuth>} />
       <Route path="/perfil/contrasena" element={<RequireAuth><ProfilePasswordPage /></RequireAuth>} />
       <Route path="/notificaciones" element={<RequireAuth><NotificationsPage /></RequireAuth>} />
+
+      {/* Opciones de Más sin funcionalidad propia todavía */}
+      <Route path="/giros-remesas" element={<RequireAuth><ComingSoonPage title="Giros y remesas" /></RequireAuth>} />
+      <Route path="/seguros-asistencias" element={<RequireAuth><ComingSoonPage title="Seguros y asistencias" /></RequireAuth>} />
+      <Route path="/beneficios" element={<RequireAuth><ComingSoonPage title="Beneficios" /></RequireAuth>} />
+      <Route path="/reportes" element={<RequireAuth><ComingSoonPage title="Reportes" /></RequireAuth>} />
+      <Route path="/seguridad" element={<RequireAuth><ComingSoonPage title="Seguridad" /></RequireAuth>} />
+      <Route path="/asistente-virtual" element={<RequireAuth><ComingSoonPage title="Asistente virtual" /></RequireAuth>} />
+      <Route path="/legal" element={<RequireAuth><ComingSoonPage title="Legal" /></RequireAuth>} />
 
       {/* Todo lo demás (onboarding, identidad, FAQs): se sirve desde el
           switch legado hasta que le llegue su fase. */}

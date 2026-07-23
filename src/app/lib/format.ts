@@ -8,6 +8,11 @@ export function formatCurrency(amount: number) {
   return currencyFormatter.format(amount);
 }
 
+export function formatCurrencyParts(amount: number) {
+  const [whole, cents] = formatCurrency(amount).split(",");
+  return { whole, cents: cents ?? "00" };
+}
+
 const dateFormatter = new Intl.DateTimeFormat("es-AR", {
   day: "2-digit",
   month: "short",

@@ -1,6 +1,27 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* ---------- Gollet / GOIAR brand tokens ----------
+     Fuente: GOIAR Design System.zip (colors_and_type.css + Foundations.tokens.json).
+     accent-violet no está en colors_and_type.css: se toma de preview/inputs.html
+     (foco de inputs) y preview/chips-badges.html (badge de notificaciones). */
+  --brand-primary-50: #FFF2F0;
+  --brand-primary-100: #FFE7E3;
+  --brand-primary-200: #FFD6D0;
+  --brand-primary-500: #FF583F;
+  --brand-primary-700: #DF4730;
+  --brand-primary-900: #841A0A;
+  --brand-neutral-50: #F7F8FE;
+  --brand-neutral-200: #E1E3ED;
+  --brand-neutral-300: #EDEFF6;
+  --brand-neutral-400: #BAC2C7;
+  --brand-neutral-600: #78838D;
+  --brand-ink: #191919;
+  --brand-accent-violet: #6F45E9;
+  --brand-success: #289B4F;
+  --brand-danger: #DF4730;
+  --brand-warning: #FFC700;
+
   --font-size: 16px;
   --background: #ffffff;
   --foreground: oklch(0.145 0 0);
@@ -8,15 +29,15 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: #030213;
-  --primary-foreground: oklch(1 0 0);
+  --primary: var(--brand-primary-500);
+  --primary-foreground: #ffffff;
   --secondary: oklch(0.95 0.0058 264.53);
   --secondary-foreground: #030213;
   --muted: #ececf0;
   --muted-foreground: #717182;
   --accent: #e9ebef;
   --accent-foreground: #030213;
-  --destructive: #d4183d;
+  --destructive: var(--brand-danger);
   --destructive-foreground: #ffffff;
   --border: rgba(0, 0, 0, 0.1);
   --input: transparent;
@@ -24,13 +45,16 @@
   --switch-background: #cbced4;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --ring: oklch(0.708 0 0);
+  --ring: var(--brand-accent-violet);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.625rem;
+  /* 6px (no 4px): shadcn Button/Input usan la clase rounded-md, que --theme
+     inline deriva como calc(var(--radius) - 2px). Con --radius:6px, radius-md
+     resuelve a los 4px que pide el DS para botones/inputs. */
+  --radius: 6px;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: #030213;

@@ -46,11 +46,11 @@ export function TransferRecipientPage() {
               placeholder="nombre.apellido.banco"
               className="flex-1"
             />
-            <Button type="submit" className="bg-[#df4730] hover:bg-[#df4730]/90 text-white">
+            <Button type="submit" className="bg-[#FF583F] hover:bg-[#DF4730] text-white">
               Continuar
             </Button>
           </div>
-          {error && <p className="text-[13px] text-[#d4183d]">{error}</p>}
+          {error && <p className="text-[13px] text-[#DF4730]">{error}</p>}
         </form>
 
         <div className="flex flex-col gap-[8px]">
@@ -62,8 +62,8 @@ export function TransferRecipientPage() {
               onClick={() => goToAmount(c.name)}
               className="w-full flex items-center gap-[12px] py-[8px] cursor-pointer text-left"
             >
-              <div className="size-[40px] rounded-full bg-[#ffe7e3] flex items-center justify-center shrink-0">
-                <User size={18} color="#df4730" />
+              <div className="size-[36px] rounded-[8px] bg-[#F7F8FE] flex items-center justify-center shrink-0">
+                <User size={18} color="#191919" />
               </div>
               <div>
                 <p className="font-['Sora:Bold',sans-serif] text-[14px] text-[#191919]">{c.name}</p>

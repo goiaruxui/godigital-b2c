@@ -29,8 +29,8 @@ export function CashInMethodSheet() {
             onClick={() => navigate(to)}
             className="w-full flex items-center gap-[12px] py-[8px] cursor-pointer text-left"
           >
-            <div className="size-[40px] rounded-full bg-[#ffe7e3] flex items-center justify-center shrink-0">
-              <Icon size={18} color="#df4730" />
+            <div className="size-[36px] rounded-[8px] bg-[#F7F8FE] flex items-center justify-center shrink-0">
+              <Icon size={18} color="#191919" />
             </div>
             <div>
               <p className="font-['Sora:Bold',sans-serif] text-[14px] text-[#191919]">{label}</p>

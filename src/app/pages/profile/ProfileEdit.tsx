@@ -39,7 +39,7 @@ export function ProfileEditPage() {
         <Button
           type="submit"
           disabled={!firstName.trim() || !lastName.trim()}
-          className="bg-[#df4730] hover:bg-[#df4730]/90 text-white h-[45px] rounded-[8px] mb-[32px]"
+          className="bg-[#FF583F] hover:bg-[#DF4730] text-white h-[45px] rounded-[4px] mb-[32px]"
         >
           Guardar
         </Button>

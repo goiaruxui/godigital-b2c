@@ -5,8 +5,9 @@ import { useWallet } from "@/app/store/useWallet";
 import { useNotifications } from "@/app/store/NotificationsContext";
 import { StatusBar } from "@/app/components/layout/StatusBar";
 import { BottomNav } from "@/app/components/layout/BottomNav";
-import { formatCurrency } from "@/app/lib/format";
+import { formatCurrencyParts } from "@/app/lib/format";
 import { TransactionRow } from "@/app/pages/activity/TransactionRow";
+import creditBanner from "@/assets/banners/home-credit-banner.svg";
 
 export function HomePage() {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ export function HomePage() {
   const { account, transactions } = useWallet();
   const { unreadCount } = useNotifications();
   const recent = transactions.slice(0, 3);
+  const balance = formatCurrencyParts(account.balance);
   const initials = state.user?.avatarInitials ?? "?";
   const firstName = state.user?.firstName ?? "";
 
@@ -31,7 +33,7 @@ export function HomePage() {
           <button type="button" aria-label="Notificaciones" onClick={() => navigate("/notificaciones")} className="relative cursor-pointer">
             <Bell size={24} color="#ffffff" />
             {unreadCount > 0 && (
-              <span className="absolute -top-[2px] -right-[2px] min-w-[16px] h-[16px] px-[3px] rounded-full bg-[#191919] text-white text-[10px] font-['Sora:Bold',sans-serif] flex items-center justify-center">
+              <span className="absolute -top-[2px] -right-[2px] min-w-[16px] h-[16px] px-[3px] rounded-full bg-[#6F45E9] text-white text-[10px] font-['Sora:Bold',sans-serif] flex items-center justify-center">
                 {unreadCount > 9 ? "9+" : unreadCount}
               </span>
             )}
@@ -49,7 +51,10 @@ export function HomePage() {
               <p className="font-['Sora:Bold',sans-serif] text-[12px] text-white">Tu CVU</p>
             </button>
           </div>
-          <p className="font-['Sora:Bold',sans-serif] text-[36px] text-white">{formatCurrency(account.balance)}</p>
+          <p className="font-['Sora:Bold',sans-serif] text-[36px] text-white">
+            {balance.whole}
+            <sup className="text-[15px]">{balance.cents}</sup>
+          </p>
           <div className="flex items-center justify-between w-full pt-[4px]">
             <button type="button" onClick={() => navigate("/cashin")} className="flex flex-col items-center gap-[8px] cursor-pointer">
               <ArrowDownToLine size={16} color="#ffffff" />
@@ -68,13 +73,17 @@ export function HomePage() {
       </div>
 
       <div className="absolute top-[304px] left-0 right-0 bottom-[64px] overflow-y-auto px-[16px] py-[24px] flex flex-col gap-[16px]">
+        <button type="button" onClick={() => navigate("/prestamos")} className="w-full cursor-pointer">
+          <img src={creditBanner} alt="Financiá tus compras en cuotas" className="w-full h-auto" />
+        </button>
+
         <button
           type="button"
           onClick={() => navigate("/buscar-servicio-full")}
           className="w-full flex items-center gap-[12px] py-[8px] cursor-pointer text-left"
         >
-          <div className="size-[40px] rounded-full bg-[#ffe7e3] flex items-center justify-center shrink-0">
-            <Receipt size={18} color="#df4730" />
+          <div className="size-[36px] rounded-[8px] bg-[#F7F8FE] flex items-center justify-center shrink-0">
+            <Receipt size={18} color="#191919" />
           </div>
           <div className="flex-1">
             <p className="font-['Sora:Bold',sans-serif] text-[14px] text-[#191919]">Pagar un servicio</p>

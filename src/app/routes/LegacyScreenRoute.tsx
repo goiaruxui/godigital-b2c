@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams, Navigate } from "react-router";
 import { useAuth } from "@/app/store/AuthContext";
 
@@ -20,7 +20,6 @@ import IdSelfieIntroImport from "@/imports/1/index";
 import IdSelfie1Import from "@/imports/2/index";
 import IdSelfie2Import from "@/imports/8/index";
 import IdSelfie3Import from "@/imports/9/index";
-import IdLoadingImport from "@/imports/Loading/index";
 import IdLoading2Import from "@/imports/Loading-1/index";
 import IdSuccessImport from "@/imports/Success-1/index";
 
@@ -102,6 +101,7 @@ export function LegacyScreenRoute() {
   const navigate = useNavigate();
   const auth = useAuth();
   const nav = (id: string) => navigate("/" + id);
+  const [idStartAccepted, setIdStartAccepted] = useState(false);
 
   switch (legacyId) {
     /* Onboarding */
@@ -149,18 +149,20 @@ export function LegacyScreenRoute() {
     /* Identidad (KYC simulado) */
     case "id-start":
       return (
-        <SimpleWrapper
-          Comp={IdStartImport}
-          onBack={() => nav("register-success")}
-          extraOverlay={<div className="absolute cursor-pointer" style={{ bottom: 80, left: 16, right: 16, height: 45 }} onClick={() => nav("id-doc-inicio")} />}
-        />
+        <div className="relative w-full h-full">
+          <IdStartImport accepted={idStartAccepted} onToggle={() => setIdStartAccepted((v) => !v)} />
+          <div className="absolute cursor-pointer" style={{ top: 44, left: 0, width: 100, height: 40 }} onClick={() => nav("register-success")} />
+          {idStartAccepted && (
+            <div className="absolute cursor-pointer" style={{ top: 715, left: 16, right: 16, height: 45 }} onClick={() => nav("id-doc-inicio")} />
+          )}
+        </div>
       );
     case "id-doc-inicio":
       return (
         <SimpleWrapper
           Comp={IdDocInicioImport}
           onBack={() => nav("id-start")}
-          extraOverlay={<div className="absolute cursor-pointer" style={{ bottom: 30, left: 16, right: 16, height: 45 }} onClick={() => nav("id-frente1")} />}
+          extraOverlay={<div className="absolute cursor-pointer" style={{ top: 715, left: 16, right: 16, height: 45 }} onClick={() => nav("id-frente1")} />}
         />
       );
     case "id-frente1":
@@ -168,7 +170,7 @@ export function LegacyScreenRoute() {
         <SimpleWrapper
           Comp={IdFrente1Import}
           onBack={() => nav("id-doc-inicio")}
-          extraOverlay={<div className="absolute cursor-pointer" style={{ bottom: 30, left: 16, right: 16, height: 45 }} onClick={() => nav("id-frente2")} />}
+          extraOverlay={<div className="absolute cursor-pointer" style={{ top: 597, left: 16, right: 16, height: 45 }} onClick={() => nav("id-frente2")} />}
         />
       );
     case "id-frente2":
@@ -178,8 +180,8 @@ export function LegacyScreenRoute() {
           onBack={() => nav("id-frente1")}
           extraOverlay={
             <>
-              <div className="absolute cursor-pointer" style={{ bottom: 78, left: 16, right: 16, height: 45 }} onClick={() => nav("id-dorso1")} />
-              <div className="absolute cursor-pointer" style={{ bottom: 25, left: 16, right: 16, height: 45 }} onClick={() => nav("id-frente1")} />
+              <div className="absolute cursor-pointer" style={{ top: 597, left: 16, right: 16, height: 45 }} onClick={() => nav("id-dorso1")} />
+              <div className="absolute cursor-pointer" style={{ top: 650, left: 16, right: 16, height: 45 }} onClick={() => nav("id-frente1")} />
             </>
           }
         />
@@ -189,7 +191,7 @@ export function LegacyScreenRoute() {
         <SimpleWrapper
           Comp={IdDorso1Import}
           onBack={() => nav("id-frente2")}
-          extraOverlay={<div className="absolute cursor-pointer" style={{ bottom: 30, left: 16, right: 16, height: 45 }} onClick={() => nav("id-dorso2")} />}
+          extraOverlay={<div className="absolute cursor-pointer" style={{ top: 597, left: 16, right: 16, height: 45 }} onClick={() => nav("id-dorso2")} />}
         />
       );
     case "id-dorso2":
@@ -199,8 +201,8 @@ export function LegacyScreenRoute() {
           onBack={() => nav("id-dorso1")}
           extraOverlay={
             <>
-              <div className="absolute cursor-pointer" style={{ bottom: 78, left: 16, right: 16, height: 45 }} onClick={() => nav("id-selfie-intro")} />
-              <div className="absolute cursor-pointer" style={{ bottom: 25, left: 16, right: 16, height: 45 }} onClick={() => nav("id-dorso1")} />
+              <div className="absolute cursor-pointer" style={{ top: 597, left: 16, right: 16, height: 45 }} onClick={() => nav("id-selfie-intro")} />
+              <div className="absolute cursor-pointer" style={{ top: 650, left: 16, right: 16, height: 45 }} onClick={() => nav("id-dorso1")} />
             </>
           }
         />
@@ -210,7 +212,7 @@ export function LegacyScreenRoute() {
         <SimpleWrapper
           Comp={IdSelfieIntroImport}
           onBack={() => nav("id-dorso2")}
-          extraOverlay={<div className="absolute cursor-pointer" style={{ bottom: 30, left: 16, right: 16, height: 45 }} onClick={() => nav("id-selfie1")} />}
+          extraOverlay={<div className="absolute cursor-pointer" style={{ top: 715, left: 16, right: 16, height: 45 }} onClick={() => nav("id-selfie1")} />}
         />
       );
     case "id-selfie1":
@@ -218,7 +220,7 @@ export function LegacyScreenRoute() {
         <SimpleWrapper
           Comp={IdSelfie1Import}
           onBack={() => nav("id-selfie-intro")}
-          extraOverlay={<div className="absolute cursor-pointer" style={{ bottom: 30, left: 16, right: 16, height: 45 }} onClick={() => nav("id-selfie2")} />}
+          extraOverlay={<div className="absolute cursor-pointer" style={{ top: 627, left: 16, right: 16, height: 45 }} onClick={() => nav("id-selfie2")} />}
         />
       );
     case "id-selfie2":
@@ -226,7 +228,7 @@ export function LegacyScreenRoute() {
         <SimpleWrapper
           Comp={IdSelfie2Import}
           onBack={() => nav("id-selfie1")}
-          extraOverlay={<div className="absolute cursor-pointer" style={{ bottom: 30, left: 16, right: 16, height: 45 }} onClick={() => nav("id-selfie3")} />}
+          extraOverlay={<div className="absolute cursor-pointer" style={{ top: 627, left: 16, right: 16, height: 45 }} onClick={() => nav("id-selfie3")} />}
         />
       );
     case "id-selfie3":
@@ -234,11 +236,9 @@ export function LegacyScreenRoute() {
         <SimpleWrapper
           Comp={IdSelfie3Import}
           onBack={() => nav("id-selfie2")}
-          extraOverlay={<div className="absolute cursor-pointer" style={{ bottom: 30, left: 16, right: 16, height: 45 }} onClick={() => nav("id-loading-2")} />}
+          extraOverlay={<div className="absolute cursor-pointer" style={{ top: 627, left: 16, right: 16, height: 45 }} onClick={() => nav("id-loading-2")} />}
         />
       );
-    case "id-loading":
-      return <AutoScreen Comp={IdLoadingImport} onDone={() => nav("id-loading-2")} />;
     case "id-loading-2":
       return <AutoScreen Comp={IdLoading2Import} onDone={() => nav("id-success")} />;
     case "id-success":

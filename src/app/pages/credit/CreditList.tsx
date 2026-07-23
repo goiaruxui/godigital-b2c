@@ -31,8 +31,8 @@ export function CreditListPage({ kind }: { kind: CreditProductKind }) {
               onClick={() => navigate(config.detailPath(item.id))}
               className="flex items-center gap-[12px] p-[16px] rounded-[12px] border border-[#e1e3ed] cursor-pointer text-left"
             >
-              <div className="size-[40px] rounded-full bg-[#ffe7e3] flex items-center justify-center shrink-0">
-                <Landmark size={18} color="#df4730" />
+              <div className="size-[36px] rounded-[8px] bg-[#F7F8FE] flex items-center justify-center shrink-0">
+                <Landmark size={18} color="#191919" />
               </div>
               <div className="flex-1">
                 <p className="font-['Sora:Bold',sans-serif] text-[14px] text-[#191919]">{formatCurrency(item.amount)}</p>
@@ -47,7 +47,7 @@ export function CreditListPage({ kind }: { kind: CreditProductKind }) {
         <div className="flex-1" />
         <Button
           onClick={() => navigate(config.simulatePath)}
-          className="bg-[#df4730] hover:bg-[#df4730]/90 text-white h-[45px] rounded-[8px]"
+          className="bg-[#FF583F] hover:bg-[#DF4730] text-white h-[45px] rounded-[4px]"
         >
           {config.newLabel}
         </Button>

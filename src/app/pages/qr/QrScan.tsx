@@ -25,7 +25,7 @@ export function QrScanPage() {
         <p className="font-['Sora:Regular',sans-serif] text-[14px] text-white/70 text-center">
           Apuntá al código QR del comercio para pagar
         </p>
-        <Button onClick={simulateScan} className="bg-[#df4730] hover:bg-[#df4730]/90 text-white h-[45px] rounded-[8px] px-[24px]">
+        <Button onClick={simulateScan} className="bg-[#FF583F] hover:bg-[#DF4730] text-white h-[45px] rounded-[4px] px-[24px]">
           Simular escaneo
         </Button>
       </div>

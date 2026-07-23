@@ -55,7 +55,7 @@ export function CardDetailPage() {
           <button
             type="button"
             onClick={handleReveal}
-            className="flex items-center justify-center gap-[8px] py-[10px] rounded-[8px] border border-[#e1e3ed] cursor-pointer"
+            className="flex items-center justify-center gap-[8px] py-[10px] rounded-[4px] border border-[#e1e3ed] cursor-pointer"
           >
             {revealed ? <EyeOff size={16} color="#df4730" /> : <Eye size={16} color="#df4730" />}
             <p className="font-['Sora:Bold',sans-serif] text-[14px] text-[#df4730]">{revealed ? "Ocultar datos" : "Ver datos"}</p>
@@ -65,7 +65,7 @@ export function CardDetailPage() {
         <button
           type="button"
           onClick={handleTogglePause}
-          className="flex items-center justify-center gap-[8px] py-[10px] rounded-[8px] border border-[#e1e3ed] cursor-pointer"
+          className="flex items-center justify-center gap-[8px] py-[10px] rounded-[4px] border border-[#e1e3ed] cursor-pointer"
         >
           {card.paused ? <Play size={16} color="#191919" /> : <Pause size={16} color="#191919" />}
           <p className="font-['Sora:Bold',sans-serif] text-[14px] text-[#191919]">{card.paused ? "Activar tarjeta" : "Pausar tarjeta"}</p>

@@ -47,7 +47,7 @@ export function CardLimitPage() {
           />
         </div>
         <div className="flex-1" />
-        <Button type="submit" disabled={!valid} className="bg-[#df4730] hover:bg-[#df4730]/90 text-white h-[45px] rounded-[8px] mb-[32px]">
+        <Button type="submit" disabled={!valid} className="bg-[#FF583F] hover:bg-[#DF4730] text-white h-[45px] rounded-[4px] mb-[32px]">
           Guardar
         </Button>
       </form>

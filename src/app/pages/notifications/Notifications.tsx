@@ -43,7 +43,7 @@ export function NotificationsPage() {
                 <p className="font-['Sora:Bold',sans-serif] text-[14px] text-[#191919]">{n.title}</p>
                 <p className="font-['Sora:Regular',sans-serif] text-[11px] text-[#78838d]">{formatDateTime(n.createdAt)}</p>
               </div>
-              <p className="font-['Sora:Regular',sans-serif] text-[13px] text-[#535d66]">{n.body}</p>
+              <p className="font-['Sora:Regular',sans-serif] text-[13px] text-[#78838d]">{n.body}</p>
             </div>
           ))
         )}
