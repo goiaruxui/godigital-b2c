@@ -34,7 +34,12 @@ import { CardDetailPage } from "@/app/pages/cards/CardDetail";
 import { CardPinPage } from "@/app/pages/cards/CardPin";
 import { CardLimitPage } from "@/app/pages/cards/CardLimit";
 import { PrestamosListPage, PrestamosSimulatePage, PrestamosConfirmPage, PrestamoDetailPage } from "@/app/pages/credit/Prestamos";
-import { AdelantosListPage, AdelantosSimulatePage, AdelantosConfirmPage, AdelantoDetailPage } from "@/app/pages/credit/Adelantos";
+import { AdelantosListPage } from "@/app/pages/credit/adelantos/AdelantosList";
+import { AdelantosCuotasPage } from "@/app/pages/credit/adelantos/Cuotas";
+import { AdelantoCuotaDetailPage } from "@/app/pages/credit/adelantos/CuotaDetail";
+import { AdelantoSimulatePage } from "@/app/pages/credit/adelantos/Simulate";
+import { AdelantoConfirmPage } from "@/app/pages/credit/adelantos/Confirm";
+import { AdelantoSuccessPage } from "@/app/pages/credit/adelantos/Success";
 import { ExchangeAmountPage } from "@/app/pages/exchange/ExchangeAmount";
 import { ExchangeConfirmPage } from "@/app/pages/exchange/ExchangeConfirm";
 import { MorePage } from "@/app/pages/more/More";
@@ -155,11 +160,13 @@ export function AppRoutes() {
       <Route path="/prestamos/confirmar" element={<RequireAuth><PrestamosConfirmPage /></RequireAuth>} />
       <Route path="/prestamos/:id" element={<RequireAuth><PrestamoDetailPage /></RequireAuth>} />
 
-      {/* Adelantos */}
+      {/* Adelantos (adelanto parcial contra una cuota de un préstamo existente) */}
       <Route path="/adelantos" element={<RequireAuth><AdelantosListPage /></RequireAuth>} />
-      <Route path="/adelantos/simular" element={<RequireAuth><AdelantosSimulatePage /></RequireAuth>} />
-      <Route path="/adelantos/confirmar" element={<RequireAuth><AdelantosConfirmPage /></RequireAuth>} />
-      <Route path="/adelantos/:id" element={<RequireAuth><AdelantoDetailPage /></RequireAuth>} />
+      <Route path="/adelantos/exito" element={<RequireAuth><AdelantoSuccessPage /></RequireAuth>} />
+      <Route path="/adelantos/:loanId" element={<RequireAuth><AdelantosCuotasPage /></RequireAuth>} />
+      <Route path="/adelantos/:loanId/:number" element={<RequireAuth><AdelantoCuotaDetailPage /></RequireAuth>} />
+      <Route path="/adelantos/:loanId/:number/simular" element={<RequireAuth><AdelantoSimulatePage /></RequireAuth>} />
+      <Route path="/adelantos/:loanId/:number/confirmar" element={<RequireAuth><AdelantoConfirmPage /></RequireAuth>} />
 
       {/* Intercambio */}
       <Route path="/intercambio" element={<RequireAuth><ExchangeAmountPage /></RequireAuth>} />

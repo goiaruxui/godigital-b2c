@@ -72,7 +72,7 @@ export type Notification = {
   read: boolean;
 };
 
-export type CreditProductKind = "loan" | "advance";
+export type CreditProductKind = "loan";
 
 export type CreditProduct = {
   id: string;
@@ -82,5 +82,16 @@ export type CreditProduct = {
   monthlyRate: number;
   monthlyPayment: number;
   totalToPay: number;
+  createdAt: string;
+};
+
+/** Adelanto parcial solicitado contra una cuota puntual de un CreditProduct (kind "loan"). */
+export type InstallmentAdvance = {
+  id: string;
+  loanId: string;
+  installmentNumber: number;
+  amount: number;
+  interest: number;
+  netAmount: number;
   createdAt: string;
 };

@@ -23,3 +23,13 @@ const dateFormatter = new Intl.DateTimeFormat("es-AR", {
 export function formatDateTime(iso: string) {
   return dateFormatter.format(new Date(iso));
 }
+
+const shortDateFormatter = new Intl.DateTimeFormat("es-AR", {
+  day: "2-digit",
+  month: "2-digit",
+  year: "numeric",
+});
+
+export function formatShortDate(iso: string) {
+  return shortDateFormatter.format(new Date(iso));
+}

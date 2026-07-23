@@ -28,17 +28,4 @@ export const CREDIT_CONFIG: Record<CreditProductKind, CreditConfig> = {
     confirmPath: "/prestamos/confirmar",
     detailPath: (id) => `/prestamos/${id}`,
   },
-  advance: {
-    label: "Adelanto",
-    labelPlural: "Adelantos",
-    newLabel: "Nuevo adelanto",
-    rate: 0.05,
-    installmentOptions: [1, 2, 3],
-    maxAmount: 300_000,
-    transactionType: "advance_disbursement",
-    listPath: "/adelantos",
-    simulatePath: "/adelantos/simular",
-    confirmPath: "/adelantos/confirmar",
-    detailPath: (id) => `/adelantos/${id}`,
-  },
 };
