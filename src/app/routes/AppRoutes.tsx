@@ -48,6 +48,9 @@ import { ProfileEditPage } from "@/app/pages/profile/ProfileEdit";
 import { ProfilePasswordPage } from "@/app/pages/profile/ProfilePassword";
 import { NotificationsPage } from "@/app/pages/notifications/Notifications";
 import { ComingSoonPage } from "@/app/pages/shared/ComingSoon";
+import { LegalHubPage } from "@/app/pages/legal/LegalHub";
+import { LegalDocumentPage } from "@/app/pages/legal/LegalDocument";
+import { LegalConsentsPage } from "@/app/pages/legal/LegalConsents";
 
 function RequireAuth({ children }: { children: ReactNode }) {
   const { state } = useAuth();
@@ -186,7 +189,9 @@ export function AppRoutes() {
       <Route path="/reportes" element={<RequireAuth><ComingSoonPage title="Reportes" /></RequireAuth>} />
       <Route path="/seguridad" element={<RequireAuth><ComingSoonPage title="Seguridad" /></RequireAuth>} />
       <Route path="/asistente-virtual" element={<RequireAuth><ComingSoonPage title="Asistente virtual" /></RequireAuth>} />
-      <Route path="/legal" element={<RequireAuth><ComingSoonPage title="Legal" /></RequireAuth>} />
+      <Route path="/legal" element={<RequireAuth><LegalHubPage /></RequireAuth>} />
+      <Route path="/legal/consentimientos" element={<RequireAuth><LegalConsentsPage /></RequireAuth>} />
+      <Route path="/legal/:docId" element={<LegalDocumentPage />} />
 
       {/* Todo lo demás (onboarding, identidad, FAQs): se sirve desde el
           switch legado hasta que le llegue su fase. */}

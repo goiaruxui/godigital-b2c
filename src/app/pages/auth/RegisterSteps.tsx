@@ -1,8 +1,8 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { useNavigate } from "react-router";
-import { toast } from "sonner";
 import { Eye, EyeOff, Check } from "lucide-react";
 import { useAuth } from "@/app/store/AuthContext";
+import { getLegalDoc, TERMS_DOC_ID, PRIVACY_DOC_ID } from "@/app/lib/legalDocs";
 import { StatusBar } from "@/app/components/layout/StatusBar";
 import { TopBar } from "@/app/components/layout/TopBar";
 import { Button } from "@/app/components/ui/button";
@@ -75,7 +75,19 @@ export function RegisterPersonalPage() {
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (!valid) return;
-    setRegistration({ firstName, lastName, phoneCountryCode, phoneAreaCode, phoneNumber, acceptedTerms });
+    const now = new Date().toISOString();
+    setRegistration({
+      firstName,
+      lastName,
+      phoneCountryCode,
+      phoneAreaCode,
+      phoneNumber,
+      acceptedTerms,
+      termsVersion: getLegalDoc(TERMS_DOC_ID)?.version ?? "",
+      termsAcceptedAt: now,
+      privacyVersion: getLegalDoc(PRIVACY_DOC_ID)?.version ?? "",
+      privacyAcceptedAt: now,
+    });
     navigate("/register-pais");
   }
 
@@ -135,7 +147,7 @@ export function RegisterPersonalPage() {
               type="button"
               onClick={(e) => {
                 e.preventDefault();
-                toast("Disponible próximamente");
+                navigate(`/legal/${TERMS_DOC_ID}`);
               }}
               className="text-[#DF4730] font-['Sora:Bold',sans-serif] cursor-pointer"
             >
@@ -146,7 +158,7 @@ export function RegisterPersonalPage() {
               type="button"
               onClick={(e) => {
                 e.preventDefault();
-                toast("Disponible próximamente");
+                navigate(`/legal/${PRIVACY_DOC_ID}`);
               }}
               className="text-[#DF4730] font-['Sora:Bold',sans-serif] cursor-pointer"
             >
