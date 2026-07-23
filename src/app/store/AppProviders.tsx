@@ -4,6 +4,7 @@ import { AccountProvider } from "./AccountContext";
 import { TransactionsProvider } from "./TransactionsContext";
 import { ProductsProvider } from "./ProductsContext";
 import { NotificationsProvider } from "./NotificationsContext";
+import { SecurityProvider } from "./SecurityContext";
 
 export function AppProviders({ children }: { children: ReactNode }) {
   return (
@@ -11,7 +12,9 @@ export function AppProviders({ children }: { children: ReactNode }) {
       <AccountProvider>
         <TransactionsProvider>
           <NotificationsProvider>
-            <ProductsProvider>{children}</ProductsProvider>
+            <ProductsProvider>
+              <SecurityProvider>{children}</SecurityProvider>
+            </ProductsProvider>
           </NotificationsProvider>
         </TransactionsProvider>
       </AccountProvider>

@@ -51,6 +51,8 @@ import { ComingSoonPage } from "@/app/pages/shared/ComingSoon";
 import { LegalHubPage } from "@/app/pages/legal/LegalHub";
 import { LegalDocumentPage } from "@/app/pages/legal/LegalDocument";
 import { LegalConsentsPage } from "@/app/pages/legal/LegalConsents";
+import { SecurityHubPage } from "@/app/pages/security/SecurityHub";
+import { SecurityDevicesPage } from "@/app/pages/security/SecurityDevices";
 
 function RequireAuth({ children }: { children: ReactNode }) {
   const { state } = useAuth();
@@ -187,7 +189,8 @@ export function AppRoutes() {
       <Route path="/seguros-asistencias" element={<RequireAuth><ComingSoonPage title="Seguros y asistencias" /></RequireAuth>} />
       <Route path="/beneficios" element={<RequireAuth><ComingSoonPage title="Beneficios" /></RequireAuth>} />
       <Route path="/reportes" element={<RequireAuth><ComingSoonPage title="Reportes" /></RequireAuth>} />
-      <Route path="/seguridad" element={<RequireAuth><ComingSoonPage title="Seguridad" /></RequireAuth>} />
+      <Route path="/seguridad" element={<RequireAuth><SecurityHubPage /></RequireAuth>} />
+      <Route path="/seguridad/dispositivos" element={<RequireAuth><SecurityDevicesPage /></RequireAuth>} />
       <Route path="/asistente-virtual" element={<RequireAuth><ComingSoonPage title="Asistente virtual" /></RequireAuth>} />
       <Route path="/legal" element={<RequireAuth><LegalHubPage /></RequireAuth>} />
       <Route path="/legal/consentimientos" element={<RequireAuth><LegalConsentsPage /></RequireAuth>} />
