@@ -11,6 +11,10 @@ export type RegistrationDraft = {
   country: string;
   firstName: string;
   lastName: string;
+  phoneCountryCode: string;
+  phoneAreaCode: string;
+  phoneNumber: string;
+  acceptedTerms: boolean;
   email: string;
   password: string;
   otpVerified: boolean;

@@ -54,8 +54,8 @@ export function LoginPage() {
               placeholder="Tu contraseña"
             />
           </div>
-          {error && <p className="text-[13px] text-[#d4183d]">{error}</p>}
-          <Button type="submit" className="bg-[#df4730] hover:bg-[#df4730]/90 text-white h-[45px] rounded-[8px] mt-[8px]">
+          {error && <p className="text-[13px] text-[#DF4730]">{error}</p>}
+          <Button type="submit" className="bg-[#FF583F] hover:bg-[#DF4730] text-white h-[45px] rounded-[4px] mt-[8px]">
             Iniciar sesión
           </Button>
         </form>
@@ -68,7 +68,7 @@ export function LoginPage() {
         </button>
         <p className="font-['Sora:Regular',sans-serif] text-[13px] text-[#78838d] text-center">
           ¿No tenés cuenta?{" "}
-          <button type="button" className="text-[#df4730] font-['Sora:Bold',sans-serif] cursor-pointer" onClick={() => navigate("/register-pais")}>
+          <button type="button" className="text-[#df4730] font-['Sora:Bold',sans-serif] cursor-pointer" onClick={() => navigate("/register-personal")}>
             Registrate
           </button>
         </p>

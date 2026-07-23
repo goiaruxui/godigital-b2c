@@ -119,7 +119,7 @@ export function LegacyScreenRoute() {
       return (
         <WalkthroughScreen
           which={1}
-          onRegister={() => nav("register-pais")}
+          onRegister={() => nav("register-personal")}
           onLogin={() => nav("login")}
           onNext={() => nav("walkthrough2")}
         />
@@ -128,7 +128,7 @@ export function LegacyScreenRoute() {
       return (
         <WalkthroughScreen
           which={2}
-          onRegister={() => nav("register-pais")}
+          onRegister={() => nav("register-personal")}
           onLogin={() => nav("login")}
           onNext={() => nav("walkthrough3")}
         />
@@ -137,9 +137,9 @@ export function LegacyScreenRoute() {
       return (
         <WalkthroughScreen
           which={3}
-          onRegister={() => nav("register-pais")}
+          onRegister={() => nav("register-personal")}
           onLogin={() => nav("login")}
-          onNext={() => nav("register-pais")}
+          onNext={() => nav("register-personal")}
         />
       );
 
@@ -244,7 +244,6 @@ export function LegacyScreenRoute() {
           Comp={IdSuccessImport}
           onDone={() => {
             auth.completeKyc();
-            auth.completeRegistration();
             navigate("/home");
           }}
         />
