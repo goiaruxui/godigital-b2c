@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useState, type FormEvent, type ReactNode } from "react";
 import { StatusBar } from "@/app/components/layout/StatusBar";
 import { TopBar } from "@/app/components/layout/TopBar";
 import { Button } from "@/app/components/ui/button";
@@ -6,12 +6,14 @@ import { formatCurrency } from "@/app/lib/format";
 
 export function AmountEntryPage({
   title,
+  header,
   subtitle,
   onBack,
   onSubmit,
   maxAmount,
 }: {
   title: string;
+  header?: ReactNode;
   subtitle?: string;
   onBack: () => void;
   onSubmit: (amount: number) => void;
@@ -38,6 +40,7 @@ export function AmountEntryPage({
       <TopBar dark title={title} onBack={onBack} />
       <form onSubmit={handleSubmit} className="absolute top-[112px] left-0 right-0 bottom-0 px-[24px] flex flex-col gap-[24px]">
         <div className="flex flex-col items-center gap-[8px] py-[24px]">
+          {header}
           {subtitle && <p className="font-['Sora:Regular',sans-serif] text-[14px] text-[#78838d]">{subtitle}</p>}
           <div className="flex items-center gap-[4px]">
             <p className="font-['Sora:Regular',sans-serif] text-[24px] text-[#191919]">$</p>
@@ -58,10 +61,10 @@ export function AmountEntryPage({
               Disponible: {formatCurrency(maxAmount)}
             </p>
           )}
-          {error && <p className="text-[13px] text-[#d4183d]">{error}</p>}
+          {error && <p className="text-[13px] text-[#DF4730]">{error}</p>}
         </div>
         <div className="flex-1" />
-        <Button type="submit" disabled={!valid} className="bg-[#df4730] hover:bg-[#df4730]/90 text-white h-[45px] rounded-[8px] mb-[32px]">
+        <Button type="submit" disabled={!valid} className="bg-[#FF583F] hover:bg-[#DF4730] text-white h-[45px] rounded-[4px] mb-[32px]">
           Continuar
         </Button>
       </form>

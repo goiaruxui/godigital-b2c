@@ -79,7 +79,7 @@ export function HomePage() {
 
         <button
           type="button"
-          onClick={() => navigate("/buscar-servicio-full")}
+          onClick={() => navigate("/servicios")}
           className="w-full flex items-center gap-[12px] py-[8px] cursor-pointer text-left"
         >
           <div className="size-[36px] rounded-[8px] bg-[#F7F8FE] flex items-center justify-center shrink-0">

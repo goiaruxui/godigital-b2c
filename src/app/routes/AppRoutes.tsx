@@ -22,8 +22,12 @@ import { TransferConfirmPage } from "@/app/pages/transfer/TransferConfirm";
 import { QrScanPage } from "@/app/pages/qr/QrScan";
 import { QrAmountPage } from "@/app/pages/qr/QrAmount";
 import { QrConfirmPage } from "@/app/pages/qr/QrConfirm";
-import { ServiceFormPage } from "@/app/pages/services/ServiceForm";
-import { ServiceConfirmPage } from "@/app/pages/services/ServiceConfirm";
+import { ServiciosSearchPage } from "@/app/pages/services/ServiciosSearch";
+import { ServiciosCategoryPage } from "@/app/pages/services/ServiciosCategory";
+import { ServiciosAccountPage } from "@/app/pages/services/ServiciosAccount";
+import { ServiciosAmountPage } from "@/app/pages/services/ServiciosAmount";
+import { ServiciosPayPage } from "@/app/pages/services/ServiciosPay";
+import { ServiciosSuccessPage } from "@/app/pages/services/ServiciosSuccess";
 import { PaymentSuccessPage } from "@/app/pages/shared/PaymentSuccess";
 import { CardsListPage } from "@/app/pages/cards/CardsList";
 import { CardDetailPage } from "@/app/pages/cards/CardDetail";
@@ -129,8 +133,12 @@ export function AppRoutes() {
       <Route path="/qr-confirm" element={<RequireAuth><QrConfirmPage /></RequireAuth>} />
 
       {/* Pago de servicios */}
-      <Route path="/servicio-datos" element={<RequireAuth><ServiceFormPage /></RequireAuth>} />
-      <Route path="/servicio-confirm" element={<RequireAuth><ServiceConfirmPage /></RequireAuth>} />
+      <Route path="/servicios" element={<RequireAuth><ServiciosSearchPage /></RequireAuth>} />
+      <Route path="/servicios/categoria/:categoryId" element={<RequireAuth><ServiciosCategoryPage /></RequireAuth>} />
+      <Route path="/servicios/:billerId" element={<RequireAuth><ServiciosAccountPage /></RequireAuth>} />
+      <Route path="/servicios/:billerId/monto" element={<RequireAuth><ServiciosAmountPage /></RequireAuth>} />
+      <Route path="/servicios/:billerId/pagar" element={<RequireAuth><ServiciosPayPage /></RequireAuth>} />
+      <Route path="/servicios/exito" element={<RequireAuth><ServiciosSuccessPage /></RequireAuth>} />
 
       {/* Resultado genérico de un movimiento de dinero */}
       <Route path="/payment-success" element={<RequireAuth><PaymentSuccessPage /></RequireAuth>} />

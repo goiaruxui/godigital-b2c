@@ -27,9 +27,6 @@ import IdSuccessImport from "@/imports/Success-1/index";
 import LoginFaceId1Import from "@/imports/LoginFaceId1/index";
 import LoginFaceId2Import from "@/imports/LoginFaceId2/index";
 
-/* ── Buscar / directorio de servicios (entrada a Pago Servicio) ── */
-import BuscarServicioFull from "@/imports/BuscarServicio1-1/index";
-
 /* ── FAQs ── */
 import FaQs1Import from "@/imports/FaQs1/index";
 import FaQs2Import from "@/imports/FaQs2/index";
@@ -268,16 +265,6 @@ export function LegacyScreenRoute() {
             auth.loginWithBiometrics();
             navigate("/home");
           }}
-        />
-      );
-
-    /* Directorio de servicios → entrada real a Pago de Servicio */
-    case "buscar-servicio-full":
-      return (
-        <SimpleWrapper
-          Comp={BuscarServicioFull}
-          onBack={() => navigate("/home")}
-          extraOverlay={<div className="absolute cursor-pointer" style={{ top: 170, left: 0, right: 0, height: 64 }} onClick={() => navigate("/servicio-datos")} />}
         />
       );
 
