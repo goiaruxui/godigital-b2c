@@ -7,10 +7,12 @@ import { TRANSACTION_META } from "@/app/lib/transactionMeta";
 import { TransactionRow } from "@/app/pages/activity/TransactionRow";
 import { filterByPeriod, type ReportPeriod } from "@/app/lib/reports";
 import { useRedirect } from "@/app/lib/useRedirect";
+import { useOpenSheet } from "@/app/routes/useOpenSheet";
 import type { TransactionType } from "@/app/store/types";
 
 export function ReportsCategoryPage() {
   const navigate = useNavigate();
+  const openSheet = useOpenSheet();
   const location = useLocation();
   const { type } = useParams();
   const { transactions } = useWallet();
@@ -38,7 +40,7 @@ export function ReportsCategoryPage() {
             </p>
           </div>
         ) : (
-          items.map((t) => <TransactionRow key={t.id} transaction={t} onClick={() => navigate(`/activity/${t.id}`)} />)
+          items.map((t) => <TransactionRow key={t.id} transaction={t} onClick={() => openSheet(`/activity/${t.id}`)} />)
         )}
       </div>
     </div>
