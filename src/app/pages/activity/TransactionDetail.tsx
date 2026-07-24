@@ -2,9 +2,12 @@ import { useNavigate, useParams } from "react-router";
 import { useWallet } from "@/app/store/useWallet";
 import { formatCurrency, formatDateTime } from "@/app/lib/format";
 import { TRANSACTION_META } from "@/app/lib/transactionMeta";
-import { ActivityPage } from "./Activity";
 import { useRedirect } from "@/app/lib/useRedirect";
+import { SheetShell } from "@/app/components/layout/SheetShell";
 
+// Se monta como overlay ARRIBA de la pantalla real desde la que se abrió
+// (Home o Actividad) — ver AppRoutes.tsx (SHEET_ROUTES) y useOpenSheet. No
+// debe renderizar ningún fondo propio: eso lo provee la pantalla de atrás.
 export function TransactionDetailSheet() {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -19,10 +22,8 @@ export function TransactionDetailSheet() {
   const isCredit = transaction.amount >= 0;
 
   return (
-    <div className="relative size-full">
-      <ActivityPage />
-      <div className="absolute inset-0 bg-black/40 cursor-pointer" onClick={() => navigate(-1)} />
-      <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-[24px] p-[24px] flex flex-col items-center gap-[16px]">
+    <SheetShell>
+      <div className="bg-white rounded-t-[24px] p-[24px] flex flex-col items-center gap-[16px]">
         <div className="flex items-center justify-between w-full">
           <p className="font-['Sora:Bold',sans-serif] text-[16px] text-[#191919]">Detalle</p>
           <button type="button" onClick={() => navigate(-1)} className="font-['Sora:Bold',sans-serif] text-[14px] text-[#df4730] cursor-pointer">
@@ -43,7 +44,7 @@ export function TransactionDetailSheet() {
           <Row label="Fecha" value={formatDateTime(transaction.createdAt)} />
         </div>
       </div>
-    </div>
+    </SheetShell>
   );
 }
 

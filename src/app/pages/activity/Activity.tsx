@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router";
 import { useWallet } from "@/app/store/useWallet";
 import { StatusBar } from "@/app/components/layout/StatusBar";
 import { BottomNav } from "@/app/components/layout/BottomNav";
 import { TransactionRow } from "./TransactionRow";
+import { useOpenSheet } from "@/app/routes/useOpenSheet";
 
 function groupByDay(transactions: ReturnType<typeof useWallet>["transactions"]) {
   const groups = new Map<string, typeof transactions>();
@@ -16,7 +16,7 @@ function groupByDay(transactions: ReturnType<typeof useWallet>["transactions"]) 
 }
 
 export function ActivityPage() {
-  const navigate = useNavigate();
+  const openSheet = useOpenSheet();
   const { transactions } = useWallet();
   const groups = groupByDay(transactions);
 
@@ -38,7 +38,7 @@ export function ActivityPage() {
             <div key={day} className="flex flex-col gap-[4px] mb-[16px]">
               <p className="font-['Sora:Bold',sans-serif] text-[12px] text-[#78838d] uppercase pt-[8px]">{day}</p>
               {items.map((t) => (
-                <TransactionRow key={t.id} transaction={t} onClick={() => navigate(`/activity/${t.id}`)} />
+                <TransactionRow key={t.id} transaction={t} onClick={() => openSheet(`/activity/${t.id}`)} />
               ))}
             </div>
           ))

@@ -14,7 +14,10 @@ function formatFull(cardNumber: string) {
 export function CardVisual({ card, revealed = false }: { card: Card; revealed?: boolean }) {
   const isCredito = card.kind === "credito";
   return (
-    <div className="relative w-full rounded-[16px] overflow-hidden text-white" style={{ aspectRatio: "328 / 210" }}>
+    <div
+      className="relative w-full rounded-[16px] overflow-hidden text-white transition-transform duration-200 ease-out hover:scale-[1.015] active:scale-[0.98]"
+      style={{ aspectRatio: "328 / 210" }}
+    >
       <img src={isCredito ? cardCredito : cardPrepaga} alt="" className="absolute inset-0 w-full h-full" />
       {isCredito && (
         <p className="absolute left-[16px] top-[17px] font-['Sora:Bold',sans-serif] text-[19px]">Gollet</p>

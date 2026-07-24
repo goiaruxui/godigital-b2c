@@ -27,16 +27,16 @@ export function BottomNav() {
             >
               {center ? (
                 <div
-                  className="absolute -top-[16px] size-[52px] rounded-full flex items-center justify-center"
+                  className="absolute -top-[16px] size-[52px] rounded-full flex items-center justify-center transition-transform duration-150 active:scale-90"
                   style={{ background: "#ff583f", boxShadow: "0 0 0 3px #fff2f0" }}
                 >
                   <Icon size={22} color="#ffffff" />
                 </div>
               ) : (
                 <>
-                  <Icon size={20} color={active ? "#ff583f" : "#78838d"} />
+                  <Icon size={20} color={active ? "#ff583f" : "#78838d"} className="transition-colors duration-200" />
                   <p
-                    className="font-['Sora:Bold',sans-serif] text-[11px]"
+                    className="font-['Sora:Bold',sans-serif] text-[11px] transition-colors duration-200"
                     style={{ color: active ? "#ff583f" : "#78838d" }}
                   >
                     {label}

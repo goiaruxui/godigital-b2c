@@ -1,7 +1,17 @@
-import type { ReactNode } from "react";
-import { Routes, Route, Navigate } from "react-router";
+import { useRef, type ReactNode } from "react";
+import { Routes, Route, Navigate, useLocation, useNavigationType, type Location } from "react-router";
+import { AnimatePresence, motion } from "motion/react";
 import { useAuth } from "@/app/store/AuthContext";
 import { LegacyScreenRoute } from "./LegacyScreenRoute";
+import {
+  getRouteKind,
+  navTypeToDirection,
+  getEnterVariant,
+  getCenterVariant,
+  getExitVariant,
+  getTransition,
+  type Direction,
+} from "./transitions";
 import {
   RegisterCountryPage,
   RegisterPersonalPage,
@@ -65,9 +75,63 @@ function RootRedirect() {
   return <Navigate to={state.status === "authenticated" ? "/home" : "/ios"} replace />;
 }
 
+// Rutas que se presentan como modal/bottom sheet ARRIBA de la pantalla real
+// desde la que se abrieron (no reemplazándola). Para navegar hacia una de
+// estas hay que usar el hook useOpenSheet (./useOpenSheet.ts), que deja
+// registrada la pantalla actual como fondo.
+const SHEET_ROUTES = (
+  <>
+    <Route
+      path="/activity/:id"
+      element={
+        <RequireAuth>
+          <TransactionDetailSheet />
+        </RequireAuth>
+      }
+    />
+    <Route
+      path="/cashin"
+      element={
+        <RequireAuth>
+          <CashInMethodSheet />
+        </RequireAuth>
+      }
+    />
+  </>
+);
+
 export function AppRoutes() {
+  const location = useLocation();
+  const navType = useNavigationType();
+  const backgroundLocation = (location.state as { backgroundLocation?: Location } | null)?.backgroundLocation;
+  const effectiveLocation = backgroundLocation ?? location;
+  const kind = getRouteKind(effectiveLocation.pathname);
+
+  // Ref (no state) para que la pantalla que se está CERRANDO pueda leer la
+  // dirección vigente al momento de salir, en vez de la que tenía cuando
+  // ENTRÓ. Ver transitions.ts (getExitVariant) para el detalle.
+  const directionRef = useRef<Direction>("forward");
+  directionRef.current = navTypeToDirection(navType);
+
+  const variants = {
+    enter: getEnterVariant(kind, directionRef.current),
+    center: getCenterVariant(kind),
+    exit: () => getExitVariant(kind, directionRef.current),
+  };
+
   return (
-    <Routes>
+    <>
+      <AnimatePresence mode="sync" initial={false}>
+        <motion.div
+          key={effectiveLocation.pathname}
+          variants={variants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={getTransition(kind)}
+          className="absolute inset-0"
+        >
+          <Routes location={effectiveLocation}>
       <Route path="/" element={<RootRedirect />} />
 
       {/* Registro */}
@@ -97,24 +161,9 @@ export function AppRoutes() {
           </RequireAuth>
         }
       />
-      <Route
-        path="/activity/:id"
-        element={
-          <RequireAuth>
-            <TransactionDetailSheet />
-          </RequireAuth>
-        }
-      />
+      {SHEET_ROUTES}
 
       {/* Cash-in */}
-      <Route
-        path="/cashin"
-        element={
-          <RequireAuth>
-            <CashInMethodSheet />
-          </RequireAuth>
-        }
-      />
       <Route
         path="/cashin/amount"
         element={
@@ -201,6 +250,20 @@ export function AppRoutes() {
       <Route path="/:legacyId" element={<LegacyScreenRoute />} />
 
       <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+          </Routes>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Capa de modal/sheet: se monta ARRIBA de la pantalla real de abajo
+          (nunca la reemplaza), y solo existe cuando alguien navegó pasando
+          `state: { backgroundLocation }`. */}
+      {backgroundLocation && (
+        <AnimatePresence mode="wait">
+          <div key={location.pathname} className="absolute inset-0 z-20">
+            <Routes location={location}>{SHEET_ROUTES}</Routes>
+          </div>
+        </AnimatePresence>
+      )}
+    </>
   );
 }

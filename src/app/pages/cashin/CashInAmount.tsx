@@ -6,9 +6,11 @@ import { StatusBar } from "@/app/components/layout/StatusBar";
 import { TopBar } from "@/app/components/layout/TopBar";
 import { Button } from "@/app/components/ui/button";
 import { formatCurrency } from "@/app/lib/format";
+import { useOpenSheet } from "@/app/routes/useOpenSheet";
 
 export function CashInAmountPage() {
   const navigate = useNavigate();
+  const openSheet = useOpenSheet();
   const { cashIn } = useWallet();
   const [amount, setAmount] = useState("");
   const numeric = Number(amount.replace(",", "."));
@@ -25,7 +27,7 @@ export function CashInAmountPage() {
   return (
     <div className="relative size-full bg-white">
       <StatusBar dark background="#ffffff" />
-      <TopBar dark title="Ingresar dinero" onBack={() => navigate("/cashin")} />
+      <TopBar dark title="Ingresar dinero" onBack={() => openSheet("/cashin")} />
       <form onSubmit={handleSubmit} className="absolute top-[112px] left-0 right-0 bottom-0 px-[24px] flex flex-col gap-[24px]">
         <div className="flex flex-col items-center gap-[8px] py-[24px]">
           <p className="font-['Sora:Regular',sans-serif] text-[14px] text-[#78838d]">¿Cuánto querés ingresar?</p>

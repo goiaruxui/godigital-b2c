@@ -7,10 +7,12 @@ import { StatusBar } from "@/app/components/layout/StatusBar";
 import { BottomNav } from "@/app/components/layout/BottomNav";
 import { formatCurrencyParts } from "@/app/lib/format";
 import { TransactionRow } from "@/app/pages/activity/TransactionRow";
+import { useOpenSheet } from "@/app/routes/useOpenSheet";
 import creditBanner from "@/assets/banners/home-credit-banner.svg";
 
 export function HomePage() {
   const navigate = useNavigate();
+  const openSheet = useOpenSheet();
   const { state } = useAuth();
   const { account, transactions } = useWallet();
   const { unreadCount } = useNotifications();
@@ -56,7 +58,7 @@ export function HomePage() {
             <sup className="text-[15px]">{balance.cents}</sup>
           </p>
           <div className="flex items-center justify-between w-full pt-[4px]">
-            <button type="button" onClick={() => navigate("/cashin")} className="flex flex-col items-center gap-[8px] cursor-pointer">
+            <button type="button" onClick={() => openSheet("/cashin")} className="flex flex-col items-center gap-[8px] cursor-pointer">
               <ArrowDownToLine size={16} color="#ffffff" />
               <p className="font-['Sora:Regular',sans-serif] text-[12px] text-white">Ingresar</p>
             </button>
@@ -107,7 +109,7 @@ export function HomePage() {
             </p>
           </div>
         ) : (
-          recent.map((t) => <TransactionRow key={t.id} transaction={t} onClick={() => navigate(`/activity/${t.id}`)} />)
+          recent.map((t) => <TransactionRow key={t.id} transaction={t} onClick={() => openSheet(`/activity/${t.id}`)} />)
         )}
       </div>
 

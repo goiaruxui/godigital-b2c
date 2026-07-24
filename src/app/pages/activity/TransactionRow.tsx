@@ -11,7 +11,7 @@ export function TransactionRow({ transaction, onClick }: { transaction: Transact
     <button
       type="button"
       onClick={onClick}
-      className="w-full flex items-center gap-[12px] py-[8px] cursor-pointer text-left"
+      className="w-full flex items-center gap-[12px] py-[8px] px-[4px] -mx-[4px] rounded-[8px] cursor-pointer text-left transition-colors duration-150 active:bg-[#F7F8FE]"
     >
       <div
         className={`size-[36px] rounded-[8px] flex items-center justify-center shrink-0 ${
