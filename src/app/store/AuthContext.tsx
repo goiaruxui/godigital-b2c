@@ -4,6 +4,9 @@ import { loadState, saveState } from "./storage";
 
 const STORAGE_KEY = "auth";
 
+const DEMO_EMAIL = "info@gmail.com";
+const DEMO_PASSWORD = "123456";
+
 const emptyRegistration: RegistrationDraft = {
   country: "",
   firstName: "",
@@ -35,6 +38,7 @@ type Action =
   | { type: "COMPLETE_KYC" }
   | { type: "COMPLETE_REGISTRATION" }
   | { type: "LOGIN" }
+  | { type: "LOGIN_DEMO" }
   | { type: "LOGOUT" }
   | { type: "UPDATE_PROFILE"; firstName: string; lastName: string }
   | { type: "CHANGE_PASSWORD"; password: string }
@@ -67,6 +71,23 @@ function reducer(state: AuthState, action: Action): AuthState {
     }
     case "LOGIN":
       return { ...state, status: "authenticated" };
+    case "LOGIN_DEMO": {
+      if (state.user) return { ...state, status: "authenticated" };
+      const user = {
+        id: crypto.randomUUID(),
+        firstName: "Info",
+        lastName: "Demo",
+        email: DEMO_EMAIL,
+        country: "Argentina",
+        avatarInitials: "ID",
+      };
+      return {
+        ...state,
+        status: "authenticated",
+        user,
+        credentials: { email: DEMO_EMAIL, password: DEMO_PASSWORD },
+      };
+    }
     case "LOGOUT":
       return { ...state, status: "guest" };
     case "UPDATE_PROFILE": {
@@ -120,8 +141,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       completeKyc: () => dispatch({ type: "COMPLETE_KYC" }),
       completeRegistration: () => dispatch({ type: "COMPLETE_REGISTRATION" }),
       login: (email, password) => {
+        const normalizedEmail = email.trim().toLowerCase();
+        if (normalizedEmail === DEMO_EMAIL && password === DEMO_PASSWORD) {
+          dispatch({ type: "LOGIN_DEMO" });
+          return true;
+        }
         const stored = state.credentials;
-        const ok = !!stored && stored.email.toLowerCase() === email.trim().toLowerCase() && stored.password === password;
+        const ok = !!stored && stored.email.toLowerCase() === normalizedEmail && stored.password === password;
         if (ok) dispatch({ type: "LOGIN" });
         return ok;
       },

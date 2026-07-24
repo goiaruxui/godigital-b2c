@@ -63,6 +63,10 @@ import { LegalDocumentPage } from "@/app/pages/legal/LegalDocument";
 import { LegalConsentsPage } from "@/app/pages/legal/LegalConsents";
 import { SecurityHubPage } from "@/app/pages/security/SecurityHub";
 import { SecurityDevicesPage } from "@/app/pages/security/SecurityDevices";
+import { ReportsHubPage } from "@/app/pages/reports/ReportsHub";
+import { ReportsCategoryPage } from "@/app/pages/reports/ReportsCategory";
+import { ReportsCertificatesPage } from "@/app/pages/reports/ReportsCertificates";
+import { ReportsCertificateDetailPage } from "@/app/pages/reports/ReportsCertificateDetail";
 
 function RequireAuth({ children }: { children: ReactNode }) {
   const { state } = useAuth();
@@ -237,7 +241,10 @@ export function AppRoutes() {
       <Route path="/giros-remesas" element={<RequireAuth><ComingSoonPage title="Giros y remesas" /></RequireAuth>} />
       <Route path="/seguros-asistencias" element={<RequireAuth><ComingSoonPage title="Seguros y asistencias" /></RequireAuth>} />
       <Route path="/beneficios" element={<RequireAuth><ComingSoonPage title="Beneficios" /></RequireAuth>} />
-      <Route path="/reportes" element={<RequireAuth><ComingSoonPage title="Reportes" /></RequireAuth>} />
+      <Route path="/reportes" element={<RequireAuth><ReportsHubPage /></RequireAuth>} />
+      <Route path="/reportes/categoria/:type" element={<RequireAuth><ReportsCategoryPage /></RequireAuth>} />
+      <Route path="/reportes/constancias" element={<RequireAuth><ReportsCertificatesPage /></RequireAuth>} />
+      <Route path="/reportes/constancias/:certId" element={<RequireAuth><ReportsCertificateDetailPage /></RequireAuth>} />
       <Route path="/seguridad" element={<RequireAuth><SecurityHubPage /></RequireAuth>} />
       <Route path="/seguridad/dispositivos" element={<RequireAuth><SecurityDevicesPage /></RequireAuth>} />
       <Route path="/asistente-virtual" element={<RequireAuth><ComingSoonPage title="Asistente virtual" /></RequireAuth>} />
