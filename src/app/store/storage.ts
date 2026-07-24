@@ -2,9 +2,12 @@
 // simply orphaned (not migrated), which is fine before there are real users.
 const PREFIX = "gdi:v2:";
 
+// sessionStorage (no localStorage): la simulación debe sobrevivir a un
+// reload de la pestaña, pero arrancar limpia (estado "guest", sin datos de
+// registros anteriores) en cada pestaña/sesión nueva del navegador.
 export function loadState<T>(key: string, fallback: T): T {
   try {
-    const raw = localStorage.getItem(PREFIX + key);
+    const raw = sessionStorage.getItem(PREFIX + key);
     if (!raw) return fallback;
     return JSON.parse(raw) as T;
   } catch {
@@ -14,14 +17,14 @@ export function loadState<T>(key: string, fallback: T): T {
 
 export function saveState<T>(key: string, value: T) {
   try {
-    localStorage.setItem(PREFIX + key, JSON.stringify(value));
+    sessionStorage.setItem(PREFIX + key, JSON.stringify(value));
   } catch {
-    // localStorage full/unavailable — state just won't survive a refresh.
+    // sessionStorage lleno/no disponible — el estado no sobrevive a un refresh.
   }
 }
 
 export function clearAllState() {
-  Object.keys(localStorage)
+  Object.keys(sessionStorage)
     .filter((k) => k.startsWith(PREFIX))
-    .forEach((k) => localStorage.removeItem(k));
+    .forEach((k) => sessionStorage.removeItem(k));
 }
